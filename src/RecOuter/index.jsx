@@ -19,6 +19,12 @@ const RecOuter = ({
   const labelRef = React.useRef();
   const [lazyExplanation, setLazyExplanation] = React.useState();
 
+  React.useLayoutEffect(() => {
+    if (!lazyExplanation && typeof json === "function") {
+      json().then(setLazyExplanation);
+    }
+  }, []);
+
   return (
     <div className={classes["rec-outer"]}>
       <div
@@ -39,11 +45,6 @@ const RecOuter = ({
           if (client.x > rect.x && client.x - rect.x < rect.width) {
             if (client.y > rect.y && client.y - rect.y < rect.height) {
               const willSelect = currentPos.width >= rect.width;
-              if (willSelect) {
-                if (!lazyExplanation && typeof json === "function") {
-                  json().then(setLazyExplanation);
-                }
-              }
               changeCurSlug(willSelect ? slug : "");
 
               // only stop the label's event
@@ -75,13 +76,13 @@ const RecOuter = ({
           />
         )}
         <div className={classes["rec-explanation"]}>
-          {!explanation && !lazyExplanation ? (
-            <div>Loading...</div>
-          ) : (
-            <AnnotationContextProvider>
-              {renderExplanations(explanation || lazyExplanation)}
-            </AnnotationContextProvider>
-          )}
+          <AnnotationContextProvider>
+            {!explanation && !lazyExplanation ? (
+              <div>Loading...</div>
+            ) : (
+              renderExplanations(explanation || lazyExplanation)
+            )}
+          </AnnotationContextProvider>
         </div>
       </div>
     </div>

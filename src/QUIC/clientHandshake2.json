@@ -13,7 +13,8 @@
           {
             "props": {
               "className": "bytes protected",
-              "title": "被数据包头保护密钥加密"
+              "title": "被数据包头保护密钥加密",
+              "key": "pk"
             },
             "content": "e0"
           },

@@ -6,6 +6,11 @@ const SluggerContext = React.createContext();
 export const SluggerContextProvider = ({ children }) => {
   const [curSlug, setCurSlug] = React.useState("");
 
+  React.useEffect(() => {
+    const href = window.location.hash.substring(1);
+    setCurSlug(window.decodeURI(href));
+  }, []);
+
   return (
     <SluggerContext.Provider
       value={{
