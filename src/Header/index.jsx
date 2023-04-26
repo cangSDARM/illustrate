@@ -2,15 +2,8 @@ import React from "react";
 import clsx from "clsx";
 import classes from "./style.module.css";
 
-const eq = (a = "", b = "") => {
-  if (a?.startsWith(b)) return true;
-  if (b?.startsWith(a)) return true;
-
-  return false;
-};
-
 const jump = (href) => {
-  if (eq(globalThis.location.pathname, href)) return;
+  if (globalThis.location.pathname.startsWith(href)) return;
 
   globalThis.history.pushState({}, "", globalThis.location.pathname);
   globalThis.history.replaceState({}, "", href);
@@ -35,7 +28,7 @@ const Header = ({ routers = [], onRouterChange, base = "" }) => {
 
     if (
       !routers.every((rt) => {
-        return eq(curPath, rt.href);
+        return curPath.startsWith(rt);
       })
     ) {
       curPath = routers[0];
