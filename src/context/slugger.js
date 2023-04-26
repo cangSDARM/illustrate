@@ -1,5 +1,6 @@
 import React from "react";
 import { slug as githubSlug } from "github-slugger";
+import { jump } from "../utils";
 
 const SluggerContext = React.createContext();
 
@@ -20,17 +21,9 @@ export const SluggerContextProvider = ({ children }) => {
 
           let href = window.location.href.replace(/#.*/, "");
           if (slug) {
-            window.history.replaceState({}, "", `${href}#${slug}`);
-            // we have some expanding action to do, so need to delay it
-            window.requestAnimationFrame(() => {
-              document.querySelector("#" + slug)?.scrollIntoView?.({
-                behavior: "smooth",
-                block: "nearest",
-                inline: "nearest",
-              });
-            });
+            jump(`${href}#${slug}`);
           } else {
-            window.history.replaceState({}, "", `${href}`);
+            jump(href);
           }
         },
         getSlug: (text) => githubSlug(text),

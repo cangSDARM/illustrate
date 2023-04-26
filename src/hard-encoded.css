@@ -1,0 +1,61 @@
+code.longboi {
+  word-break: break-all;
+}
+.ind1 {
+  padding-left: 1em;
+}
+.ind2 {
+  padding-left: 2em;
+}
+.decryption-header::before {
+  content: "⇩ ";
+  font-weight: bold;
+  color: var(--chunky-text);
+}
+.decryption-header::after {
+  content: " ⇩";
+  font-weight: bold;
+  color: var(--chunky-text);
+}
+.decryption-header {
+  margin: 1em 0;
+  text-align: center;
+  display: block;
+}
+.encrypted.bytes {
+  text-shadow: 1px 1px 0 red;
+}
+.decrypted.bytes {
+  text-shadow: 1px 1px 0 green;
+}
+.bytes:hover {
+  background-color: var(--client-bg-hover);
+}
+.bytes:hover {
+  background-color: var(--server-bg-hover);
+}
+.bytes {
+  padding: 0.2em 0;
+  position: relative;
+}
+.bytes::after {
+  content: " ";
+  width: 1ex;
+  display: inline-block;
+}
+.bytes.protected {
+  color: var(--prot-text);
+  text-shadow: 1px 1px 3px var(--prot-text-shadow);
+}
+.bytes.unprotected {
+  display: none;
+}
+.bytes.protected {
+  display: inline;
+}
+.bytes.unprotected.hp-disabled {
+  display: inline;
+}
+.bytes.protected.hp-disabled {
+  display: none;
+}

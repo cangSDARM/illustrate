@@ -1,0 +1,99 @@
+:root {
+  --chunky-text: #777;
+  --server-bg: hsl(190, 60%, 80%);
+  --client-bg: hsl(142, 61%, 82%);
+  --server-bg-hover: hsl(288, 28%, 83%);
+  --client-bg-hover: hsl(288, 31%, 80%);
+
+  --prot-text: #555;
+  --prot-text-shadow: #555;
+
+  --sam-btn0: hsl(190, 30%, 45%);
+  --sam-btn9: hsl(190, 25%, 40%);
+  --sam-hov-btn0: hsl(190, 30%, 40%);
+  --sam-hov-btn9: hsl(190, 25%, 35%);
+  --sam-btn-shadow: hsl(180, 41%, 28%);
+  --sam-btn-inset: hsl(180, 45%, 40%);
+  --sam-btn-border: hsl(161, 10%, 37%);
+
+  --act-btn0: hsl(37, 96%, 54%);
+  --act-btn9: hsl(25, 91%, 54%);
+  --act-hov-btn0: hsl(32, 94%, 52%);
+  --act-hov-btn9: hsl(21, 88%, 51%);
+  --act-btn-shadow: hsl(25, 91%, 40%);
+  --act-btn-border: hsl(33, 90%, 45%);
+}
+
+/* remove focus rings for non-keyboard users */
+body:not(.user-is-tabbing) button:focus,
+body:not(.user-is-tabbing) input:focus,
+body:not(.user-is-tabbing) select:focus,
+body:not(.user-is-tabbing) textarea:focus {
+  outline: none;
+}
+
+body {
+  /* printmode */
+  position: relative;
+}
+
+.container {
+  /* printmode */
+  overflow: auto;
+}
+
+pre {
+  margin: 0.5em 0;
+  padding: 1em;
+  overflow: auto;
+  max-height: 18em;
+  background: #f4f3ef;
+}
+
+pre code {
+  font-size: 1em;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.5;
+  background-color: unset;
+  padding: 0;
+  margin: 0;
+}
+
+code {
+  background-color: #e5e2e0;
+  margin: 0 0.2em;
+  padding: 0.1em;
+  border-radius: 0.3em;
+  white-space: normal;
+}
+
+table {
+  border-spacing: 0;
+}
+table thead th {
+  color: #495057;
+  min-width: 4rem;
+  text-align: left;
+  vertical-align: bottom;
+  border-bottom: 1px solid #aaa4;
+}
+table tbody td {
+  border: 1px solid transparent;
+  padding: 0 0.25rem;
+}
+
+ol,
+ul,
+dl {
+  margin: 1rem 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}

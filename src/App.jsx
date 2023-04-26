@@ -1,7 +1,11 @@
 import React from "react";
+
+import "./common.css";
+import "./hard-encoded.css";
+import "./illustrated.css";
+
 import Header from "./Header";
 import Intro from "./Intro";
-import "./illustrated.css";
 import { routers, base } from "./router";
 import RecOuter from "./RecOuter";
 import { SluggerContextProvider } from "./context/slugger";
@@ -26,6 +30,7 @@ const App = () => {
         routers={routers}
         base={base}
         onRouterChange={(rt) => {
+          window.document.title = rt.title;
           setLoading(true);
           setCurPage(rt);
         }}

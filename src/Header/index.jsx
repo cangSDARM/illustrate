@@ -1,26 +1,17 @@
 import React from "react";
 import clsx from "clsx";
 import classes from "./style.module.css";
-
-const jump = (href) => {
-  if (globalThis.location.pathname.startsWith(href)) return;
-
-  globalThis.history.pushState({}, "", globalThis.location.pathname);
-  globalThis.history.replaceState({}, "", href);
-};
+import { jump } from "../utils";
 
 const getRouterUsingPath = (routers = [], path = "") =>
   routers.find((rt) => rt.href.startsWith(path)) || routers[0];
 
 const Header = ({ routers = [], onRouterChange, base = "" }) => {
-  const [pathName, setPathName] = React.useState([
-    globalThis.location.pathname,
-  ]);
+  const [pathName, setPathName] = React.useState(globalThis.location.pathname);
 
   const handleRouterChange = React.useCallback((rt) => {
     onRouterChange?.(rt);
     setPathName(rt.href);
-    window.document.title = rt.title;
   }, []);
 
   React.useEffect(() => {

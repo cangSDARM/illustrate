@@ -87,6 +87,15 @@
 .rec-outer p:last-child {
   margin-bottom: 0;
 }
+
+@media (max-width: 600px) {
+  .record .illustration,
+  .calculation .illustration {
+    /* hide keys when there is no room for them */
+    display: none !important;
+  }
+}
+
 /* ---------------------------------- selected */
 
 .record.selected,

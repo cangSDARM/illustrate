@@ -23,7 +23,24 @@ const RecOuter = ({
     if (!lazyExplanation && typeof json === "function") {
       json().then(setLazyExplanation);
     }
-  }, []);
+  }, [json]);
+
+  React.useEffect(() => {
+    if (curSlug === slug) {
+      // we have some expanding action to do, so need to delay it
+      window.requestAnimationFrame(() => {
+        try {
+          document.querySelector("#" + slug)?.scrollIntoView?.({
+            behavior: "smooth",
+            block: "nearest",
+            inline: "nearest",
+          });
+
+          // maybe its not a valid selector
+        } catch (e) {}
+      });
+    }
+  }, [curSlug, slug]);
 
   return (
     <div className={classes["rec-outer"]}>
@@ -35,7 +52,10 @@ const RecOuter = ({
         )}
         onClick={(e) => {
           const client = { x: e.clientX, y: e.clientY };
-          const currentPos = labelRef.current.getBoundingClientRect();
+          const currentPos = labelRef.current?.getBoundingClientRect();
+          // TODO: we lost our label, maybe we should reload this component/page entirely
+          if (!currentPos || !labelOriginalSize) return;
+
           const rect = {
             width: labelOriginalSize.width,
             height: labelOriginalSize.height,
