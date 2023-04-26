@@ -10,3 +10,10 @@
 - https://tls12.xargs.org/
 
 原作者 [syncsynchalt](https://github.com/syncsynchalt), 译者 [AllenLee](https://github.com/cangSDARM)
+
+## 进度
+
+- [x] QUIC
+- [ ] DTLS
+- [ ] TLS 1.2
+- [ ] TLS 1.3
