@@ -2,10 +2,10 @@
   "name": "illustrate",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
-    "start": "yarn parcel index.html",
-    "format": "prettier --write \"./src/**/*.{js,jsx,css,scss}\""
+    "start": "parcel index.html",
+    "format": "prettier --write \"./src/**/*.{js,jsx,css,scss}\"",
+    "build": "parcel build index.html"
   },
   "author": "",
   "license": "ISC",

@@ -1,0 +1,55 @@
+name: deploy gh-pages
+
+on:
+  pull_request:
+    types: [closed]
+    branches: [master]
+
+  push:
+    branches: [master]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2
+
+      - name: Environment Setup 🔧
+        uses: actions/setup-node@v1
+        with:
+          node-version: "14.x"
+
+      - name: Cache dependencies 🍪
+        uses: actions/cache@v2
+        id: cache
+        with:
+          path: |
+            **/.npm
+            **/node_modules/
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - name: Install dependencies without Proxy 📁
+        # only install when cache miss or package.json changed
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm --proxy=null --https_proxy=null --strict-ssl=true install
+
+      - name: Cache buildings 🏗
+        uses: actions/cache@v2
+        id: building
+        with:
+          path: |
+            **/.parcel-cache/
+            **/dist/
+          key: ${{ runner.os }}-build
+
+      - name: Build 🚧
+        run: npm run build
+
+      - name: Deploy 🚀
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: ./dist
