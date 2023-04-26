@@ -1,0 +1,125 @@
+.rec-outer {
+  max-width: 800px;
+  margin: 0.8em auto;
+  position: relative;
+}
+
+.server {
+  background-color: var(--server-bg);
+}
+
+.client {
+  background-color: var(--client-bg);
+}
+
+.embedded {
+  margin-left: 2em;
+}
+.embedded::before {
+  content: "➥";
+  left: 0;
+  top: 0;
+  position: absolute;
+  display: inline-block;
+  font-size: 2em;
+  color: var(--chunky-text);
+}
+
+.record,
+.calculation {
+  max-width: 800px;
+  padding: 1em;
+  border-radius: 1em;
+  border: 2px solid transparent;
+}
+
+.record:hover,
+.calculation:hover {
+  border: 2px solid #666;
+}
+
+.client.record .rec-label:before {
+  content: "❱ ";
+  color: var(--chunky-text);
+}
+
+.server.record .rec-label:before {
+  content: "❰ ";
+  color: var(--chunky-text);
+}
+
+.calculation .rec-label:before {
+  content: "± ";
+  font-weight: bold;
+  color: var(--chunky-text);
+}
+
+.rec-label {
+  cursor: pointer;
+  font-size: 1.3em;
+  user-select: none;
+  overflow: visible;
+  transform: translateX(0px);
+
+  white-space: nowrap;
+  text-align: center;
+  width: 100%;
+  transition: all 0.3s;
+}
+.rec-label a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.record .illustration,
+.calculation .illustration {
+  margin: -40px 0 0 0;
+  display: none;
+  float: right;
+  user-select: none;
+}
+
+.rec-explanation {
+  display: none;
+  margin-bottom: 1em;
+}
+
+.rec-outer p:last-child {
+  margin-bottom: 0;
+}
+/* ---------------------------------- selected */
+
+.record.selected,
+.calculation.selected {
+  cursor: inherit;
+  box-shadow: rgba(0, 0, 0, 0.3) 2px 2px 2px;
+}
+
+.record.selected:hover,
+.calculation.selected:hover {
+  border: 2px solid transparent;
+}
+
+.record.selected .rec-label,
+.calculation.selected .rec-label {
+  padding: 0 0 10px 0;
+  width: 0;
+}
+
+.record.selected .rec-label:after,
+.calculation.selected .rec-label:after {
+  color: var(--chunky-text);
+  content: " ×";
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.record.selected .illustration,
+.calculation.selected .illustration {
+  display: block;
+}
+
+.selected .rec-explanation {
+  display: block;
+}
+/* ---------------------------------- selected */

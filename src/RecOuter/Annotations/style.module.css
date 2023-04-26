@@ -1,0 +1,107 @@
+.annotate-toggle {
+  margin-bottom: 1em;
+
+  display: inline-block;
+  outline: none;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 1em;
+  font-weight: bold;
+  padding: 0.4em 1.7em 0.45em;
+  text-shadow: 0 1px 0 var(--act-btn-shadow);
+  border-radius: 0.5em;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+
+  color: #fff;
+  border: solid 1px var(--act-btn-border);
+  background: linear-gradient(180deg, var(--act-btn0) 1%, var(--act-btn9) 100%);
+}
+.annotate-toggle:hover {
+  text-decoration: none;
+  background: linear-gradient(
+    180deg,
+    var(--act-hov-btn0) 1%,
+    var(--act-hov-btn9) 100%
+  );
+}
+.annotate-toggle:active {
+  position: relative;
+  top: 1px;
+}
+
+.record-data {
+  display: block;
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+  position: relative;
+}
+.annotate:hover > :first-child {
+  display: none !important;
+}
+.record-data .string {
+  position: relative;
+}
+.record-data .string > :first-child {
+  display: none;
+  position: absolute;
+  background-color: #faf7dc;
+  border-radius: 5px;
+  margin: 2px 0;
+  padding: 2px 7px;
+  line-height: 1.2;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  user-select: none;
+  top: -28px;
+  box-shadow: rgba(0, 0, 0, 0.3) 2px 2px 2px;
+}
+.record-data .string > :first-child::after {
+  content: "";
+  position: absolute;
+  box-shadow: rgba(0, 0, 0, 0.3) 2px 2px 2px;
+  transform: rotate(45deg);
+  bottom: -3px;
+  left: 10px;
+  border-width: 3px;
+  border-style: solid;
+  border-color: transparent #faf7dc #faf7dc transparent;
+}
+.record-data .string:hover > :first-child {
+  display: inline;
+}
+
+.explanation {
+  display: none;
+}
+.explanation-expanded {
+  position: relative;
+  display: block;
+  font-size: 0.9em;
+  color: black;
+  margin: 1em 0;
+  padding: 1em;
+  background-color: #faf7dc;
+  border: 2px solid #e0d998;
+  border-radius: 1em;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  box-shadow: rgba(0, 0, 0, 0.3) 2px 2px 2px;
+}
+.record-data .explanation p {
+  margin-bottom: 0.35rem;
+}
+.record-data .explanation-expanded:before {
+  content: " ";
+  position: absolute;
+  padding: 5px;
+  transform: rotate(45deg);
+  top: -7px;
+  left: 20px;
+  border: 2px solid;
+  background-color: #faf7dc;
+  border-color: #e0d998 transparent transparent #e0d998;
+}
+
+ul {
+  margin: 0.75rem 0;
+}

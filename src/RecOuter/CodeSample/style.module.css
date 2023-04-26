@@ -1,0 +1,69 @@
+/***** .sample *****/
+
+.sample {
+  display: block;
+  margin: 1em 0;
+  position: relative;
+}
+
+.sample pre {
+  margin: 0;
+  height: 0;
+  padding: 0;
+}
+
+.sample button.show-code {
+  display: block;
+  clear: both;
+  box-shadow: inset 0 0 5px 0 var(--sam-btn-inset);
+  background: linear-gradient(
+    to bottom,
+    var(--sam-btn0) 1%,
+    var(--sam-btn9) 100%
+  );
+  border-radius: 5px;
+  border: 1px solid var(--sam-btn-border);
+  cursor: pointer;
+  color: white;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 11px 23px;
+  text-decoration: none;
+  text-shadow: 0 1px 0 var(--sam-btn-shadow);
+}
+
+.sample button.show-code:hover {
+  background: linear-gradient(
+    to bottom,
+    var(--sam-hov-btn0) 1%,
+    var(--sam-hov-btn9) 100%
+  );
+}
+.sample button.show-code:active {
+  position: relative;
+  top: 1px;
+}
+.sample.show button.show-code {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: none;
+}
+.sample.show:hover button.show-code {
+  display: block;
+}
+.sample.show pre {
+  height: auto;
+  background-color: black;
+}
+
+.sample pre code {
+  font-size: inherit;
+  word-break: normal;
+  display: block;
+  color: white;
+  padding: 0.5em;
+  border-radius: 5px;
+}
+/***** annotation toggle button *****/

@@ -1,0 +1,10 @@
+build
+dist
+node_modules
+
+.parcel-cache
+
+*.local
+
+yarn.lock
+package-lock.json

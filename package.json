@@ -1,0 +1,24 @@
+{
+  "name": "illustrate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "yarn parcel index.html",
+    "format": "prettier --write \"./src/**/*.{js,jsx,css,scss}\""
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel": "^2.8.3",
+    "prettier": "^2.8.7",
+    "process": "^0.11.10"
+  },
+  "dependencies": {
+    "clsx": "^1.2.1",
+    "github-slugger": "^2.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-wrap-balancer": "^0.4.0"
+  }
+}
