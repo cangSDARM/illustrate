@@ -31,6 +31,15 @@ const Header = ({ routers = [], onRouterChange, base = "" }) => {
         return curPath.startsWith(rt);
       })
     ) {
+      // try state for github-pages
+      curPath = globalThis.history.state?.path || "";
+    }
+
+    if (
+      !routers.every((rt) => {
+        return curPath.startsWith(rt);
+      })
+    ) {
       curPath = routers[0];
       jump(curPath.href);
       handleRouterChange(getRouterUsingPath(routers, curPath));
