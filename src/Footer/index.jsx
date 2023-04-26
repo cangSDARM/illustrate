@@ -28,8 +28,8 @@ const Footer = ({ desc, mother }) => {
             (Github)@AllenLee
           </a>
           , 源代码托管在{" "}
-          <a href="https://quic.xargs.org/" target="_blank">
-            https://quic.xargs.org/
+          <a href="https://cangsdarm.github.io/illustrate/" target="_blank">
+            https://cangsdarm.github.io/illustrate/
           </a>
         </p>
       </div>
