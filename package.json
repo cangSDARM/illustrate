@@ -5,12 +5,16 @@
   "scripts": {
     "start": "parcel index.html",
     "format": "prettier --write \"./src/**/*.{js,jsx,css,scss}\"",
-    "build": "parcel build index.html"
+    "build": "parcel build index.html --public-url ./"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "AllenLee<648384410li@gmail.com>",
+  "license": "MIT",
+  "staticFiles": {
+    "staticPath": "public"
+  },
   "devDependencies": {
     "parcel": "^2.8.3",
+    "parcel-reporter-static-files-copy": "^1.5.0",
     "prettier": "^2.8.7",
     "process": "^0.11.10"
   },
