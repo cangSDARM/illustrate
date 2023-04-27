@@ -30,7 +30,7 @@
       "type": "record-data",
       "data": [
         [
-          "TLS 握手帧头",
+          "TLS 握手消息头",
           {
             "props": {
               "className": "bytes"
@@ -88,7 +88,7 @@
             "content": "00"
           },
           [
-            "这是一个保留(legacy)字段，不在 QUIC 中使用。",
+            "这是一个废弃(legacy)字段，不在 QUIC 中使用。",
             {
               "Tag": "ul",
               "children": [
@@ -172,7 +172,7 @@
           ]
         ],
         [
-          "可选扩展的字节长",
+          "扩展的长度",
           {
             "props": {
               "className": "bytes"
@@ -186,7 +186,7 @@
               "children": [
                 {
                   "Tag": "li",
-                  "content": "00 bb - 扩展将占用 0xBB(187) 字节的数据"
+                  "content": "00 bb - 扩展列表的长度为 0xBB(187) 字节"
                 }
               ]
             },
@@ -382,7 +382,7 @@
           ]
         ],
         [
-          "扩展 - 算法公钥列表",
+          "扩展 - 算法公钥列表(Key Share)",
           {
             "props": {
               "className": "bytes"

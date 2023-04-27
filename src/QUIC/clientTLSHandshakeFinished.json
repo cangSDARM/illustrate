@@ -9,7 +9,7 @@
       "type": "record-data",
       "data": [
         [
-          "TLS 握手帧头",
+          "TLS 握手消息头",
           {
             "props": {
               "className": "bytes"
@@ -27,7 +27,7 @@
                 },
                 {
                   "Tag": "li",
-                  "content": "00 00 20 - 紧接着的验证数据的长度 0x20 (32) 字节"
+                  "content": "00 00 20 - 紧接着的握手消息数据的长度 0x20 (32) 字节"
                 }
               ]
             }

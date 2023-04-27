@@ -9,7 +9,7 @@
       "type": "record-data",
       "data": [
         [
-          "TLS 握手帧头",
+          "TLS 握手消息头",
           {
             "props": {
               "className": "bytes"
