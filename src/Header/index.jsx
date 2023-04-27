@@ -17,24 +17,17 @@ const Header = ({ routers = [], onRouterChange, base = "" }) => {
   React.useEffect(() => {
     let curPath = globalThis.location.pathname;
 
-    if (
-      !routers.every((rt) => {
-        return curPath.startsWith(rt);
-      })
-    ) {
+    if (routers.findIndex((rt) => curPath.startsWith(rt.href)) < 0) {
       // try state for github-pages
       curPath = globalThis.history.state?.path || "";
     }
 
-    if (
-      !routers.every((rt) => {
-        return curPath.startsWith(rt);
-      })
-    ) {
+    if (routers.findIndex((rt) => curPath.startsWith(rt.href)) < 0) {
       curPath = routers[0];
       jump(curPath.href);
-      handleRouterChange(getRouterUsingPath(routers, curPath));
     }
+
+    handleRouterChange(getRouterUsingPath(routers, curPath));
   }, []);
 
   React.useEffect(() => {
