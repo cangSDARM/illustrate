@@ -20,9 +20,48 @@ const data = {
     },
     {
       type: "RecOuter",
-      tags: ["calculation", "client"],
+      tags: ["record", "client"],
       label: "ClientHello 数据报",
       json: () => import("./clientHelloDatagram.json"),
+    },
+    {
+      type: "RecOuter",
+      tags: ["calculation", "server"],
+      label: "服务器端准备密钥交换",
+      illustration: {
+        src: "https://quic.xargs.org/images/key3.png",
+        width: "130",
+        height: "250",
+      },
+      json: () => import("./serverKeyExchangeGeneration.json"),
+    },
+    {
+      type: "RecOuter",
+      tags: ["record", "server"],
+      label: "ServerHello 数据报",
+      json: () => import("./serverHelloDatagram.json"),
+    },
+    {
+      type: "RecOuter",
+      tags: ["calculation", "server"],
+      label: "服务器端生成握手密钥",
+      illustration: {
+        src: "https://quic.xargs.org/images/key5.png",
+        width: "124",
+        height: "250",
+      },
+      json: () => import("./serverHandshakeKeysCalc.json"),
+    },
+    {
+      type: "RecOuter",
+      tags: ["calculation", "client"],
+      label: "客户端生成握手密钥",
+      illustration: {
+        src: "https://quic.xargs.org/images/key6.png",
+        width: "105",
+        height: "250",
+      },
+      json: () => import("./clientHandshakeKeysCalc.json"),
     },
   ],
   ending: {
