@@ -92,7 +92,8 @@ const RecOuter = ({
             src={illustration.src}
             width={illustration.width}
             height={illustration.height}
-            alt={illustration.alt}
+            alt={illustration.alt || "key of " + label}
+            loading="lazy"
           />
         )}
         <div className={classes["rec-explanation"]}>
