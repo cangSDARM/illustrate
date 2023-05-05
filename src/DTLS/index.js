@@ -63,6 +63,28 @@ const data = {
       },
       json: () => import("./clientHandshakeKeysCalc.json"),
     },
+    {
+      type: "RecOuter",
+      tags: ["record", "server"],
+      label: "服务器端加密后的额外扩展数据报",
+      illustration: {
+        src: "https://quic.xargs.org/images/key5.png",
+        width: "124",
+        height: "250",
+      },
+      json: () => import("./serverEncryptedExtensionsDatagram.json"),
+    },
+    {
+      type: "RecOuter",
+      tags: ["record", "server"],
+      label: "服务器端证书数据报",
+      illustration: {
+        src: "https://quic.xargs.org/images/key5.png",
+        width: "130",
+        height: "250",
+      },
+      json: () => import("./serverCertificateDatagram.json"),
+    },
   ],
   ending: {
     mother: "https://dtls.xargs.org/",

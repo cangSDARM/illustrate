@@ -77,17 +77,17 @@
             "content": "01 00 00 91"
           },
           [
-            "每个 TLS 握手记录都以一个 type 和一个 len 开始。",
+            "每个 TLS 握手消息都以一个 type 和一个 len 开始。",
             {
               "Tag": "ul",
               "children": [
                 {
                   "Tag": "li",
-                  "content": "01 - 握手记录类型 0x01 (ClientHello)"
+                  "content": "01 - 握手消息类型 0x01 (ClientHello)"
                 },
                 {
                   "Tag": "li",
-                  "content": "00 00 91 - 紧接着的握手记录数据的长度 0x91 (145) 字节"
+                  "content": "00 00 91 - 紧接着的握手消息数据的长度 0x91 (145) 字节"
                 }
               ]
             }

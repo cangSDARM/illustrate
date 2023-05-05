@@ -1,0 +1,330 @@
+[
+  "连接(包括握手)的数据从这时候起就能够被加密了。加密握手数据是 DTLS 1.3 的新特性。",
+  "任何不需要协商其他加密密钥的扩展都会列在这里。加密以隐藏它们不被窃听者和中间件(middleboxes)发现。",
+  {
+    "Tag": "AnnotationToggler"
+  },
+  {
+    "Tag": "Annotations",
+    "props": {
+      "type": "record-data",
+      "data": [
+        [
+          "头部信息字节",
+          {
+            "props": {
+              "className": "bytes"
+            },
+            "content": "2e"
+          },
+          [
+            "加密的 DTLS 数据包都以一个 \"统一的头部(unified header)\"开始。头部的第一个字节给出了头部和数据包的结构信息，以及解密时需要的信息。",
+            "值 0x2e 具有以下含义：",
+            {
+              "Tag": "Table",
+              "props": {
+                "headers": ["", "值", "含义"],
+                "data": [
+                  ["高位", "001", "固定位"],
+                  ["", "0", "头部中不存在连接 ID 字段(1则存在)"],
+                  ["", "1", "序列号在头部中占 2 字节长"],
+                  ["", "1", "头部中存在\"记录长度\"字段(0则不存在)"],
+                  [
+                    "低位",
+                    "10",
+                    "加密序列指示(Encryption epoch 2)，现在密钥是握手时密钥"
+                  ]
+                ]
+              }
+            }
+          ]
+        ],
+        [
+          "记录序号",
+          {
+            "props": {
+              "className": "bytes protected",
+              "title": "被加密"
+            },
+            "content": "79 fa"
+          },
+          {
+            "props": {
+              "className": "bytes unprotected"
+            },
+            "content": "00 00"
+          },
+          [
+            "记录序号是被加密了的，用以防止中间件误解(interpreting)或干扰数据包的排序。",
+            "加密是通过用 \"服务器端序号保护密钥\" 对每个数据包的有效载荷样本进行加密，然后将每个数据包中的某些比特和字节与所得数据进行 XOR 得到。",
+            "如果说的不够详细，这里有一个如何加密的例子：",
+            {
+              "Tag": "CodeSample",
+              "props": {
+                "code": "### \"server record number key\" from handshake keys calc step above\n$ key=7173fac51194e775001d625ef69d7c9f\n### sample is taken from 16 bytes of payload starting 5 bytes into the record\n$ sample=ee9dcff3f8679a4859fe68377fb34ada\n$ echo $sample | xxd -r -p | openssl aes-128-ecb -K $key | head -c 2 | xxd -p\n\n79fa\n\n### the above bytes are xor'd one-for-one into the bytes of the record number"
+              }
+            }
+          ]
+        ],
+        [
+          "记录长度",
+          {
+            "props": {
+              "className": "bytes"
+            },
+            "content": "00 2f"
+          },
+          [
+            "每个记录除非给出这个长度字段，否则对等端将认为数据报剩余的所有字节都是同一个记录的真实载荷。有了这一字段，则在一个数据报中可以发送好几个 TLS 记录(尽管例子中的连接没有利用这个优势)。",
+            {
+              "Tag": "ul",
+              "children": [
+                {
+                  "Tag": "li",
+                  "content": "00 2f - 表示 TLS 记录长度为 0x2F(47) 字节"
+                }
+              ]
+            }
+          ]
+        ],
+        [
+          "加密的数据载荷",
+          {
+            "props": {
+              "className": "bytes encrypted",
+              "title": "被\"握手密钥\"加密"
+            },
+            "content": "ee 9d cf f3 f8 67 9a 48 59 fe 68 37 7f b3 4a da 85 df 87 9c 67 3e 50 1d 7a 4e 8f 19 50 e0 fc"
+          },
+          ["这些数据使用服务器端的\"握手密钥\"进行加密。"]
+        ],
+        [
+          "AEAD 鉴别标签",
+          {
+            "props": {
+              "className": "bytes"
+            },
+            "content": "f6 7f e4 42 e7 d7 d2 b8 a3 d5 fa 59 57 4f fd 00"
+          },
+          [
+            {
+              "children": [
+                "这是 ",
+                {
+                  "Tag": "a",
+                  "props": {
+                    "href": "https://zhuanlan.zhihu.com/p/28566058"
+                  },
+                  "content": "AEAD 算法"
+                },
+                "的鉴别标签，确认加密数据和记录头的完整性。它由加密算法产生，并由解密算法消耗。"
+              ]
+            }
+          ]
+        ]
+      ]
+    }
+  },
+  {
+    "Tag": "Annotations",
+    "props": {
+      "data": [
+        [
+          "",
+          {
+            "props": {
+              "className": "decryption-header"
+            },
+            "content": "解密后的数据载荷"
+          },
+          [
+            { "Tag": "h4", "content": "解密" },
+            "数据被 \"服务器端握手密钥计算\" 步骤中产生的初始密钥和初始向量(IVs)加密。IVs 通过密钥和已经用密钥加密的记录长度进行异或操作生成。在例子中 IV 为 0。",
+            "数据包开头的 5 字节(记录头)还会作为解密过程解密成功时必须满足的认证条件。",
+            {
+              "children": [
+                "openssl 命令行工具还不支持 AEAD 算法加解密(AEAD ciphers)，你可以使用作者的命令行工具来",
+                {
+                  "Tag": "a",
+                  "props": {
+                    "href": "https://quic.xargs.org/files/aes_128_gcm_decrypt.c"
+                  },
+                  "content": "解密"
+                },
+                "和",
+                {
+                  "Tag": "a",
+                  "props": {
+                    "href": "https://quic.xargs.org/files/aes_128_gcm_encrypt.c"
+                  },
+                  "content": "加密"
+                },
+                "这些数据。"
+              ]
+            },
+            {
+              "Tag": "CodeSample",
+              "props": {
+                "code": "### from the \"Server Handshake Keys Calc\" step\n$ key=004e03e64ab6cba6b542775ec230e20a\n$ iv=6d9924be044ee97c624913f2\n### from this record\n$ recdata=2e0000002f\n$ authtag=f67fe442e7d7d2b8a3d5fa59574ffd00\n$ recordnum=0\n### may need to add -I and -L flags for include and lib dirs\n$ cc -o aes_128_gcm_decrypt aes_128_gcm_decrypt.c -lssl -lcrypto\n$ cat /tmp/msg1   | ./aes_128_gcm_decrypt $iv $recordnum $key $recdata $authtag   | hexdump -C\n\n00000000  08 00 00 12 00 01 00 00  00 00 00 12 00 10 00 0a  |................|\n00000010  00 0c 00 0a 00 17 00 1d  00 18 00 19 01 00 16     |...............|"
+              }
+            }
+          ]
+        ]
+      ]
+    }
+  },
+  {
+    "Tag": "Annotations",
+    "props": {
+      "type": "record-data",
+      "data": [
+        [
+          "握手消息头",
+          {
+            "props": {
+              "className": "bytes encrypted"
+            },
+            "content": "08 00 00 12"
+          },
+          [
+            "每个握手消息都以一个 type 和一个 len 开始。",
+            {
+              "Tag": "ul",
+              "children": [
+                {
+                  "Tag": "li",
+                  "content": "08 - 握手消息类型 0x08 (encrypted extensions)"
+                },
+                {
+                  "Tag": "li",
+                  "content": "00 00 12 - 紧接着的握手消息数据的长度 0x12 (18) 字节"
+                }
+              ]
+            }
+          ]
+        ],
+        [
+          "用于重建握手顺序的信息(Handshake Reconstruction Data)",
+          {
+            "props": {
+              "className": "bytes encrypted"
+            },
+            "content": "00 01 00 00 00 00 00 12"
+          },
+          [
+            "因为 UDP (或其他数据报协议)不保证交付或排序，而且数据报的长度可能比需要发送的握手记录长度要小。因此 DTLS 必须提供一定的信息，以支持在数据丢失、包重排序或有记录碎片的情况下，使得对等端(peer)能够重新构建一条正确的 DTLS 记录。",
+            {
+              "Tag": "ul",
+              "children": [
+                {
+                  "Tag": "li",
+                  "content": "00 01 - DTLS 序列号 0x1(1)"
+                },
+                {
+                  "Tag": "li",
+                  "content": "00 00 00 - 表明记录碎片的偏移量为 0x00(0) 字节"
+                },
+                {
+                  "Tag": "li",
+                  "content": "00 00 12 - 表明之后的记录碎片的长度为 0x12(18) 字节"
+                }
+              ]
+            },
+            "在本文例子中，整个握手记录的长度要短于一个 UDP 数据报的可承载长度，因此偏移量为零，且长度为整个握手记录长。"
+          ]
+        ],
+        [
+          "扩展的长度",
+          {
+            "props": {
+              "className": "bytes encrypted"
+            },
+            "content": "00 10"
+          },
+          [
+            "服务器向客户端返回的扩展有序列表的长度。",
+            {
+              "Tag": "ul",
+              "children": [
+                {
+                  "Tag": "li",
+                  "content": "00 10 - 扩展列表的长度为 0x10(16) 字节"
+                }
+              ]
+            }
+          ]
+        ],
+        [
+          "扩展 - 支持的组",
+          {
+            "props": {
+              "className": "bytes encrypted"
+            },
+            "content": "00 0a 00 0c 00 0a 00 17 00 1d 00 18 00 19 01 00"
+          },
+          [
+            "服务器返回它所支持的椭圆曲线加解密算法列表。为了使这个扩展对其他密码学类型更加通用，因此称这些为 \"支持的组\" 而不是 \"支持的曲线\"。",
+            {
+              "Tag": "ul",
+              "children": [
+                {
+                  "Tag": "li",
+                  "content": "00 0a - 表示这是 \"支持的组\" 扩展"
+                },
+                {
+                  "Tag": "li",
+                  "content": "00 0c - 扩展信息长度为 0x0c(12) 字节 "
+                },
+                {
+                  "Tag": "li",
+                  "content": "00 0a - 曲线列表条目长度为 0x0a(10) 字节"
+                },
+                {
+                  "Tag": "li",
+                  "content": "00 17 - 代表 secp256r1 曲线"
+                },
+                {
+                  "Tag": "li",
+                  "content": "00 1d - 代表 x25519 曲线"
+                },
+                {
+                  "Tag": "li",
+                  "content": "00 18 - 代表 secp384r1 曲线"
+                },
+                {
+                  "Tag": "li",
+                  "content": "00 19 - 代表 secp521r1 曲线"
+                },
+                {
+                  "Tag": "li",
+                  "content": "10 00 - 代表 ffdhe2048 曲线"
+                }
+              ]
+            }
+          ]
+        ],
+        [
+          "记录类型",
+          {
+            "props": {
+              "className": "bytes encrypted"
+            },
+            "content": "16"
+          },
+          [
+            "每一个加密的 DTLS 1.3 记录的最后一个字节都需要表明其真正的记录类型",
+            {
+              "Tag": "ul",
+              "children": [
+                {
+                  "Tag": "li",
+                  "content": "16 - 类型为 0x16(22), 握手记录"
+                }
+              ]
+            }
+          ]
+        ]
+      ]
+    }
+  }
+]

@@ -77,17 +77,17 @@
             "content": "02 00 00 56"
           },
           [
-            "每个 TLS 握手记录都以一个 type 和一个 len 开始。",
+            "每个 TLS 握手消息都以一个 type 和一个 len 开始。",
             {
               "Tag": "ul",
               "children": [
                 {
                   "Tag": "li",
-                  "content": "02 - 握手记录类型 0x02 (ServerHello)"
+                  "content": "02 - 握手消息类型 0x02 (ServerHello)"
                 },
                 {
                   "Tag": "li",
-                  "content": "00 00 56 - 紧接着的握手记录数据的长度 0x56 (86) 字节"
+                  "content": "00 00 56 - 紧接着的握手消息数据的长度 0x56 (86) 字节"
                 }
               ]
             }
