@@ -111,13 +111,13 @@ const data = {
     {
       type: "RecOuter",
       tags: ["record", "server", "embedded"],
-      label: "TLS: 加密的 TLS 扩展相关数据",
+      label: "TLS: TLS 记录的加密的扩展",
       json: () => import("./tls-encryptedExtensions.json"),
     },
     {
       type: "RecOuter",
       tags: ["record", "server", "embedded"],
-      label: "TLS: 证书",
+      label: "TLS: TLS 记录证书",
       json: () => import("./tls-certificate.json"),
     },
     {

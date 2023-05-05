@@ -5,7 +5,7 @@
     "children": [
       {
         "Tag": "li",
-        "content": "客户端公钥(提取自 ClientHello 数据包)"
+        "content": "客户端公钥(提取自 ClientHello 数据报)"
       },
       {
         "Tag": "li",
@@ -123,7 +123,7 @@
       {
         "Tag": "li",
         "children": [
-          "客户端记录保护密钥(record number key): ",
+          "客户端序号保护密钥(record number key): ",
           {
             "Tag": "code",
             "content": "beed6218676635c2cb46a45694144fec"
@@ -153,7 +153,7 @@
       {
         "Tag": "li",
         "children": [
-          "服务器端记录保护密钥: ",
+          "服务器端序号保护密钥: ",
           {
             "Tag": "code",
             "content": "7173fac51194e775001d625ef69d7c9f"

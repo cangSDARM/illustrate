@@ -55,7 +55,7 @@ const Header = ({ routers = [], onRouterChange, base = "" }) => {
             e.stopPropagation();
             e.preventDefault();
             jump(rt.href);
-            handleRouterChange?.(rt);
+            handleRouterChange(rt);
           }}
         >
           {rt.label}

@@ -7,6 +7,7 @@ export const renderExplanations = (explanations = [], depth = 0, config) => {
 
   return explanations.map((exp, idx) => {
     if (typeof exp === "string") {
+      // p don't allowed in p
       if (depth !== 0) return exp;
       else return <DefaultTag key={idx}>{exp}</DefaultTag>;
     }
@@ -40,9 +41,11 @@ export const renderExplanations = (explanations = [], depth = 0, config) => {
 
     let content = expContent;
 
+    // support naked string
     if (Array.isArray(exp)) {
       content = renderExplanations(exp, depth + 1, config);
     }
+    // configured children
     if (Array.isArray(expChildren)) {
       content = renderExplanations(expChildren, depth + 1, config);
     }

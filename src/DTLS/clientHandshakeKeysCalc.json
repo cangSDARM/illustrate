@@ -1,11 +1,11 @@
 [
-  "客户端现在也拥有了用于计算握手步骤的加密密钥的所有信息。在这个计算中，客户端使用了以下信息：",
+  "客户端现在也拥有了用于计算握手时的加密密钥的所有信息。在这个计算中，客户端使用了以下信息：",
   {
     "Tag": "ul",
     "children": [
       {
         "Tag": "li",
-        "content": "服务器端公钥(提取自 ServerHello 数据包)"
+        "content": "服务器端公钥(提取自 ServerHello 数据报)"
       },
       {
         "Tag": "li",
@@ -75,7 +75,7 @@
       {
         "Tag": "li",
         "children": [
-          "客户端记录保护密钥(record number key): ",
+          "客户端序号保护密钥(record number key): ",
           {
             "Tag": "code",
             "content": "beed6218676635c2cb46a45694144fec"
@@ -105,7 +105,7 @@
       {
         "Tag": "li",
         "children": [
-          "服务器端记录保护密钥: ",
+          "服务器端序号保护密钥: ",
           {
             "Tag": "code",
             "content": "7173fac51194e775001d625ef69d7c9f"
