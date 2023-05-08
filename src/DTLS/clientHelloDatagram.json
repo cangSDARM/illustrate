@@ -38,13 +38,13 @@
             "content": "16 fe fd 00 00 00 00 00 00 00 00 00 9d"
           },
           [
-            "每个 DTLS 数据都以一个 type、一些序列信息(seq info)和一个 len 开始。",
+            "每个 DTLS 记录都以一个 type、一些序列信息(seq info)和一个 len 开始。",
             {
               "Tag": "ul",
               "children": [
                 {
                   "Tag": "li",
-                  "content": "16 - 表示 TLS 数据类型 0x16(22, Handshake)"
+                  "content": "16 - 表示 DTLS 记录类型 0x16(22, Handshake)"
                 },
                 {
                   "Tag": "li",
@@ -149,7 +149,7 @@
           ]
         ],
         [
-          "会话 ID",
+          "会话 ID (废弃)",
           {
             "props": {
               "className": "bytes"
@@ -170,7 +170,7 @@
           ]
         ],
         [
-          "Cookie",
+          "Cookie (废弃)",
           {
             "props": {
               "className": "bytes"
@@ -347,7 +347,7 @@
                 },
                 {
                   "Tag": "li",
-                  "content": "02 - TLS 版本长度为 0x02(2) 字节"
+                  "content": "02 - DTLS 版本长度为 0x02(2) 字节"
                 },
                 {
                   "Tag": "li",
@@ -453,7 +453,7 @@
             "props": {
               "className": "bytes"
             },
-            "content": "00 2b 00 03 02 fe fc"
+            "content": "00 16 00 00"
           },
           [
             {
@@ -468,29 +468,18 @@
                 },
                 "。在 DTLS 1.3 中，这个机制始终被开启，因此这个扩展在会话中没有影响。"
               ]
-            }
-          ]
-        ],
-        [
-          "扩展 - Encrypt-then-MAC",
-          {
-            "props": {
-              "className": "bytes"
             },
-            "content": "00 2b 00 03 02 fe fc"
-          },
-          [
             {
+              "Tag": "ul",
               "children": [
-                "客户端表示其支持 EtM。EtM 可以防止早期版本的 TLS 和 DTLS 的",
                 {
-                  "Tag": "a",
-                  "props": {
-                    "href": "https://iacr.org/archive/crypto2001/21390309.pdf"
-                  },
-                  "content": "某些漏洞"
+                  "Tag": "li",
+                  "content": "00 16 - 表示这是 \"EtM\" 扩展"
                 },
-                "。在 DTLS 1.3中，这个机制始终被开启，因此这个扩展在会话中没有影响。"
+                {
+                  "Tag": "li",
+                  "content": "00 00 - 扩展信息长度为 0x00(0) 字节 "
+                }
               ]
             }
           ]
@@ -504,7 +493,7 @@
             "content": "00 0a 00 04 00 02 00 1d"
           },
           [
-            "(例子中的)客户端表示它支持三种类型的椭圆曲线算法(ECC)。为了使这个扩展对其他密码学类型更加通用，因此称这些为 \"支持的组\" 而不是 \"支持的曲线\"。",
+            "(例子中的)客户端表示它支持一种类型的椭圆曲线算法(ECC)。为了使这个扩展对其他密码学类型更加通用，因此称这些为 \"支持的组\" 而不是 \"支持的曲线\"。",
             "这个列表同样是按照客户端的偏好降序排列的。",
             {
               "Tag": "ul",

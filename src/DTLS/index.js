@@ -79,11 +79,34 @@ const data = {
       tags: ["record", "server"],
       label: "服务器端证书数据报",
       illustration: {
-        src: "https://quic.xargs.org/images/key5.png",
+        src: "https://quic.xargs.org/images/key3.png",
         width: "130",
         height: "250",
       },
       json: () => import("./serverCertificateDatagram.json"),
+    },
+    {
+      type: "RecOuter",
+      tags: ["record", "server"],
+      label: "服务器端证书验证数据报",
+      illustration: {
+        src: "https://quic.xargs.org/images/key5.png",
+        width: "124",
+        height: "250",
+      },
+      json: () => import("./serverCertVerifyDatagram.json"),
+    },
+    {
+      type: "RecOuter",
+      tags: ["record", "server"],
+      label: "服务器端握手完成数据报",
+      json: () => import("./serverHandshakeFinishedDatagram.json"),
+    },
+    {
+      type: "RecOuter",
+      tags: ["record", "client"],
+      label: "客户端握手完成数据报",
+      json: () => import("./clientHandshakeFinishedDatagram.json"),
     },
   ],
   ending: {
