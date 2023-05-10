@@ -84,7 +84,7 @@
       "在命令行中使用",
       {
         "Tag": "a",
-        "props": { "href": "https://quic.xargs.org/files/hkdf.sh" },
+        "props": { "href": "https://dtls.xargs.org/files/hkdf-dtls.sh" },
         "content": "原作者制作的 HKDF 命令行脚本"
       },
       "，你也可以自己试试："

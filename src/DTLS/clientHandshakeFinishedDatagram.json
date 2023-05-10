@@ -146,7 +146,7 @@
                 {
                   "Tag": "a",
                   "props": {
-                    "href": "https://quic.xargs.org/files/aes_128_gcm_decrypt.c"
+                    "href": "https://dtls.xargs.org/files/aes_128_gcm_decrypt.c"
                   },
                   "content": "解密"
                 },
@@ -154,7 +154,7 @@
                 {
                   "Tag": "a",
                   "props": {
-                    "href": "https://quic.xargs.org/files/aes_128_gcm_encrypt.c"
+                    "href": "https://dtls.xargs.org/files/aes_128_gcm_encrypt.c"
                   },
                   "content": "加密"
                 },
@@ -164,7 +164,7 @@
             {
               "Tag": "CodeSample",
               "props": {
-                "code": "### from the \"Client Handshake Keys Calc\" step\n$ key=6caa2633d5e48f10051e69dc45549c97\n$ iv=106dc6e393b7a9ea8ef29dd7\n### from this record\n$ recdata=2e0000003d\n$ authtag=07a2c5f75f7cffb7465bc01d23d8511f\n$ recordnum=0\n### may need to add -I and -L flags for include and lib dirs\n$ cc -o aes_128_gcm_decrypt aes_128_gcm_decrypt.c -lssl -lcrypto\n$ cat /tmp/msg1   | ./aes_128_gcm_decrypt $iv $recordnum $key $recdata $authtag   | hexdump -C\n\\n00000000  14 00 00 20 00 01 00 00  00 00 00 20 6f 28 01 39\\n00000010  6b 0e 90 eb b4 a3 ba 38  4a bc fc 6b 24 20 1a bd\\n00000020  81 b3 16 b2 39 1d a3 78  37 7f ac f5 16"
+                "code": "### from the \"Client Handshake Keys Calc\" step\n$ key=6caa2633d5e48f10051e69dc45549c97\n$ iv=106dc6e393b7a9ea8ef29dd7\n### from this record\n$ recdata=2e0000003d\n$ authtag=07a2c5f75f7cffb7465bc01d23d8511f\n$ recordnum=0\n### may need to add -I and -L flags for include and lib dirs\n$ cc -o aes_128_gcm_decrypt aes_128_gcm_decrypt.c -lssl -lcrypto\n$ cat /tmp/msg1   | ./aes_128_gcm_decrypt $iv $recordnum $key $recdata $authtag   | hexdump -C\n\n00000000  14 00 00 20 00 01 00 00  00 00 00 20 6f 28 01 39\n00000010  6b 0e 90 eb b4 a3 ba 38  4a bc fc 6b 24 20 1a bd\n00000020  81 b3 16 b2 39 1d a3 78  37 7f ac f5 16"
               }
             }
           ]
@@ -257,7 +257,9 @@
                 "在命令行中使用",
                 {
                   "Tag": "a",
-                  "props": { "href": "https://quic.xargs.org/files/hkdf.sh" },
+                  "props": {
+                    "href": "https://dtls.xargs.org/files/hkdf-dtls.sh"
+                  },
                   "content": "原作者制作的 HKDF 命令行脚本"
                 },
                 "，你也可以自己试试："
@@ -266,7 +268,7 @@
             {
               "Tag": "CodeSample",
               "props": {
-                "code": "### find the hash of the conversation to this point, excluding\n### cleartext record headers, DTLS-only record headers,\n### or 1-byte decrypted record trailers\n$ fin_hash=$((\n    cat record-chello  | perl -0777 -pe 's/.{13}(.{4}).{8}/$1/s';\n    cat record-shello  | perl -0777 -pe 's/.{13}(.{4}).{8}/$1/s';\n    cat record-encext  | perl -0777 -pe 's/(.{4}).{8}(.*).$/$1$2/s';\n    cat record-cert    | perl -0777 -pe 's/(.{4}).{8}(.*).$/$1$2/s';\n    cat record-cverify | perl -0777 -pe 's/(.{4}).{8}(.*).$/$1$2/s';\n    cat record-sfin    | perl -0777 -pe 's/(.{4}).{8}(.*).$/$1$2/s';\n  ) | openssl sha256)\n$ cht_secret=33e472fb8d821b0193314626bebee307ccbd1aeb3d3a17ba468888ffc5246da1\n$ fin_key=$(./hkdf-dtls expandlabel $cht_secret \"finished\" \"\" 32)\n$ echo $fin_hash | xxd -r -p     | openssl dgst -sha256 -mac HMAC -macopt hexkey:$fin_key\n\\n6f2801396b0e90ebb4a3ba384abcfc6b24201abd81b316b2391da378377facf5"
+                "code": "### find the hash of the conversation to this point, excluding\n### cleartext record headers, DTLS-only record headers,\n### or 1-byte decrypted record trailers\n$ fin_hash=$((\n    cat record-chello  | perl -0777 -pe 's/.{13}(.{4}).{8}/$1/s';\n    cat record-shello  | perl -0777 -pe 's/.{13}(.{4}).{8}/$1/s';\n    cat record-encext  | perl -0777 -pe 's/(.{4}).{8}(.*).$/$1$2/s';\n    cat record-cert    | perl -0777 -pe 's/(.{4}).{8}(.*).$/$1$2/s';\n    cat record-cverify | perl -0777 -pe 's/(.{4}).{8}(.*).$/$1$2/s';\n    cat record-sfin    | perl -0777 -pe 's/(.{4}).{8}(.*).$/$1$2/s';\n  ) | openssl sha256)\n$ cht_secret=33e472fb8d821b0193314626bebee307ccbd1aeb3d3a17ba468888ffc5246da1\n$ fin_key=$(./hkdf-dtls expandlabel $cht_secret \"finished\" \"\" 32)\n$ echo $fin_hash | xxd -r -p     | openssl dgst -sha256 -mac HMAC -macopt hexkey:$fin_key\n\n6f2801396b0e90ebb4a3ba384abcfc6b24201abd81b316b2391da378377facf5"
               }
             }
           ]

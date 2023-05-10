@@ -146,7 +146,7 @@
                 {
                   "Tag": "a",
                   "props": {
-                    "href": "https://quic.xargs.org/files/aes_128_gcm_decrypt.c"
+                    "href": "https://dtls.xargs.org/files/aes_128_gcm_decrypt.c"
                   },
                   "content": "解密"
                 },
@@ -154,7 +154,7 @@
                 {
                   "Tag": "a",
                   "props": {
-                    "href": "https://quic.xargs.org/files/aes_128_gcm_encrypt.c"
+                    "href": "https://dtls.xargs.org/files/aes_128_gcm_encrypt.c"
                   },
                   "content": "加密"
                 },

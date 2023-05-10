@@ -108,6 +108,53 @@ const data = {
       label: "客户端握手完成数据报",
       json: () => import("./clientHandshakeFinishedDatagram.json"),
     },
+    {
+      type: "RecOuter",
+      tags: ["calculation", "server"],
+      label: "服务器端生成会话密钥",
+      illustration: {
+        src: "https://quic.xargs.org/images/key9.png",
+        width: "97",
+        height: "250",
+      },
+      json: () => import("./serverApplicationKeysCalc.json"),
+    },
+    {
+      type: "RecOuter",
+      tags: ["calculation", "client"],
+      label: "客户端生成会话密钥",
+      illustration: {
+        src: "https://quic.xargs.org/images/key8.png",
+        width: "97",
+        height: "250",
+      },
+      json: () => import("./clientApplicationKeysCalc.json"),
+    },
+    {
+      type: "RecOuter",
+      tags: ["record", "server"],
+      label: "服务器端握手 ACK 数据报",
+      id: "serverHandshake3",
+      json: () => import("./serverACKDatagram.json"),
+    },
+    {
+      type: "RecOuter",
+      tags: ["record", "client"],
+      label: "客户端会话数据报",
+      json: () => import("./clientApplicationDataDatagram.json"),
+    },
+    {
+      type: "RecOuter",
+      tags: ["record", "server"],
+      label: "服务器端会话数据报",
+      json: () => import("./serverApplicationDataDatagram.json"),
+    },
+    {
+      type: "RecOuter",
+      tags: ["record", "server"],
+      label: "服务器端警告数据报(alert datagram)",
+      json: () => import("./serverAlertDatagram.json"),
+    },
   ],
   ending: {
     mother: "https://dtls.xargs.org/",

@@ -9,7 +9,7 @@
           "客户端会话密钥: ",
           {
             "Tag": "code",
-            "content": "e010a295f0c2864f186b2a7e8fdc9ed7"
+            "content": "9ba90dbce8857bc1fcb81d41a0465cfe"
           }
         ]
       },
@@ -19,17 +19,17 @@
           "客户端会话向量: ",
           {
             "Tag": "code",
-            "content": "eb3fbc384a3199dcf6b4c808"
+            "content": "682219974631fa0656ee4eff"
           }
         ]
       },
       {
         "Tag": "li",
         "children": [
-          "客户端会话数据包头保护密钥: ",
+          "客户端序号保护密钥: ",
           {
             "Tag": "code",
-            "content": "8a6a38bc5cc40cb482a254dac68c9d2f"
+            "content": "5cb5bd8bac29777c650c0dde22d16d47"
           }
         ]
       },
@@ -39,7 +39,7 @@
           "服务器端会话密钥: ",
           {
             "Tag": "code",
-            "content": "fd8c7da9de1b2da4d2ef9fd5188922d0"
+            "content": "2b65fffbbc8189474aa2003c43c32d4d"
           }
         ]
       },
@@ -49,17 +49,17 @@
           "服务器端会话向量: ",
           {
             "Tag": "code",
-            "content": "02f6180e4f4aa456d7e8a602"
+            "content": "582f5a11bdaf973fe3ffeb4e"
           }
         ]
       },
       {
         "Tag": "li",
         "children": [
-          "服务器端会话数据包头保护密钥: ",
+          "服务器端序号保护密钥: ",
           {
             "Tag": "code",
-            "content": "b7f6f021453e52b58940e4bba72a35d4"
+            "content": "57ba02596c6a1352d7fe8416c7e17d5a"
           }
         ]
       }

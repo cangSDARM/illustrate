@@ -146,7 +146,7 @@
                 {
                   "Tag": "a",
                   "props": {
-                    "href": "https://quic.xargs.org/files/aes_128_gcm_decrypt.c"
+                    "href": "https://dtls.xargs.org/files/aes_128_gcm_decrypt.c"
                   },
                   "content": "解密"
                 },
@@ -154,7 +154,7 @@
                 {
                   "Tag": "a",
                   "props": {
-                    "href": "https://quic.xargs.org/files/aes_128_gcm_encrypt.c"
+                    "href": "https://dtls.xargs.org/files/aes_128_gcm_encrypt.c"
                   },
                   "content": "加密"
                 },
@@ -257,7 +257,9 @@
                 "在命令行中使用",
                 {
                   "Tag": "a",
-                  "props": { "href": "https://quic.xargs.org/files/hkdf.sh" },
+                  "props": {
+                    "href": "https://dtls.xargs.org/files/hkdf-dtls.sh"
+                  },
                   "content": "原作者制作的 HKDF 命令行脚本"
                 },
                 "，你也可以自己试试："
