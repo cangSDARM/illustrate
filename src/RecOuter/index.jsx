@@ -20,10 +20,12 @@ const RecOuter = ({
   const [lazyExplanation, setLazyExplanation] = React.useState();
 
   React.useLayoutEffect(() => {
-    if (!lazyExplanation && typeof json === "function") {
-      json().then(setLazyExplanation);
+    if (curSlug === slug) {
+      if (!lazyExplanation && typeof json === "function") {
+        json().then(setLazyExplanation);
+      }
     }
-  }, [json]);
+  }, [curSlug, json]);
 
   React.useEffect(() => {
     if (curSlug === slug) {
