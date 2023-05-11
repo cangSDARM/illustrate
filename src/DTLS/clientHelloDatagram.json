@@ -220,6 +220,19 @@
                   "content": "13 03 - 代表 TLS_CHACHA20_POLY1305_SHA256"
                 }
               ]
+            },
+            {
+              "children": [
+                "完整加解密算法列表请查看 ",
+                {
+                  "Tag": "a",
+                  "props": {
+                    "href": "https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml"
+                  },
+                  "content": "IANA tls-parameters"
+                },
+                " 的 TLS Cipher Suites 部分。"
+              ]
             }
           ]
         ],
@@ -270,7 +283,7 @@
             "content": "00 61"
           },
           [
-            "客户端提供了一个可选的扩展列表，服务器可以根据它来采取某些行动或启用某些新功能。",
+            "客户端提供了一个可选的扩展列表，服务器可以根据它来采取某些行动或启用某些特性。",
             {
               "Tag": "ul",
               "children": [
