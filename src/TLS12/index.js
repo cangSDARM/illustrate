@@ -16,7 +16,7 @@ const data = {
         width: "135",
         height: "250",
       },
-      json: () => import("./clientHelloDatagram.json"),
+      json: () => import("./clientHello.json"),
     },
   ],
   ending: {
