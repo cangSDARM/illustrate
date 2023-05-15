@@ -18,6 +18,39 @@ const data = {
       },
       json: () => import("./clientHello.json"),
     },
+    {
+      type: "RecOuter",
+      tags: ["record", "server"],
+      label: "ServerHello",
+      illustration: {
+        src: "https://quic.xargs.org/images/key2.png",
+        width: "124",
+        height: "250",
+      },
+      json: () => import("./serverHello.json"),
+    },
+    {
+      type: "RecOuter",
+      tags: ["record", "server"],
+      label: "服务器端证书",
+      illustration: {
+        src: "https://quic.xargs.org/images/key3.png",
+        width: "130",
+        height: "250",
+      },
+      json: () => import("./serverCertificate.json"),
+    },
+    {
+      type: "RecOuter",
+      tags: ["calculation", "server"],
+      label: "服务器端准备密钥交换",
+      illustration: {
+        src: "https://quic.xargs.org/images/key4.png",
+        width: "106",
+        height: "250",
+      },
+      json: () => import("./serverKeyExchangeGeneration.json"),
+    },
   ],
   ending: {
     mother: "https://tls12.xargs.org/",
