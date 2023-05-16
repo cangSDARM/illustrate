@@ -51,6 +51,23 @@ const data = {
       },
       json: () => import("./serverKeyExchangeGeneration.json"),
     },
+    {
+      type: "RecOuter",
+      tags: ["record", "server"],
+      label: "服务器端密钥交换",
+      illustration: {
+        src: "https://quic.xargs.org/images/key5.png",
+        width: "138",
+        height: "250",
+      },
+      json: () => import("./serverKeyExchange.json"),
+    },
+    {
+      type: "RecOuter",
+      tags: ["record", "server"],
+      label: "服务器端握手完成",
+      json: () => import("./serverHelloDone.json"),
+    },
   ],
   ending: {
     mother: "https://tls12.xargs.org/",
