@@ -68,6 +68,39 @@ const data = {
       label: "服务器端握手完成",
       json: () => import("./serverHelloDone.json"),
     },
+    {
+      type: "RecOuter",
+      tags: ["calculation", "client"],
+      label: "客户端准备密钥交换",
+      illustration: {
+        src: "https://quic.xargs.org/images/key6.png",
+        width: "105",
+        height: "250",
+      },
+      json: () => import("./clientKeyExchangeGeneration.json"),
+    },
+    {
+      type: "RecOuter",
+      tags: ["record", "client"],
+      label: "客户端密钥交换",
+      illustration: {
+        src: "https://quic.xargs.org/images/key7.png",
+        width: "116",
+        height: "250",
+      },
+      json: () => import("./clientKeyExchange.json"),
+    },
+    {
+      type: "RecOuter",
+      tags: ["calculation", "client"],
+      label: "客户端生成会话密钥",
+      illustration: {
+        src: "https://quic.xargs.org/images/key8.png",
+        width: "97",
+        height: "250",
+      },
+      json: () => import("./clientEncryptionKeysGeneration.json"),
+    },
   ],
   ending: {
     mother: "https://tls12.xargs.org/",

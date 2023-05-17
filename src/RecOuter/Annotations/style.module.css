@@ -66,6 +66,7 @@
   border-width: 3px;
   border-style: solid;
   border-color: transparent #faf7dc #faf7dc transparent;
+  z-index: 9;
 }
 .record-data .string:hover > :first-child {
   display: inline;
