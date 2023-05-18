@@ -101,6 +101,18 @@ const data = {
       },
       json: () => import("./clientEncryptionKeysGeneration.json"),
     },
+    {
+      type: "RecOuter",
+      tags: ["record", "client"],
+      label: "客户端秘钥规格变更",
+      json: () => import("./clientChangeCipherSpec.json"),
+    },
+    {
+      type: "RecOuter",
+      tags: ["record", "client"],
+      label: "客户端握手完成",
+      json: () => import("./clientHandshakeFinished.json"),
+    },
   ],
   ending: {
     mother: "https://tls12.xargs.org/",
