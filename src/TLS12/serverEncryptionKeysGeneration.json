@@ -1,5 +1,5 @@
 [
-  "客户端现在可以计算应用会话时的密钥了。在这个计算中，客户端使用了以下信息：",
+  "服务器端现在也可以计算应用会话时的密钥了。在这个计算中，服务器端使用了以下信息：",
   {
     "Tag": "ul",
     "children": [
@@ -13,15 +13,15 @@
       },
       {
         "Tag": "li",
-        "content": "服务器端公钥(服务器端密钥交换)"
+        "content": "客户端公钥(客户端密钥交换)"
       },
       {
         "Tag": "li",
-        "content": "客户端私钥(客户端准备密钥交换)"
+        "content": "服务器端私钥(服务器端准备密钥交换)"
       }
     ]
   },
-  "客户端使用 curve25519 将服务器端公钥乘以自己的私钥。该 32 字节的结果为(称为 PreMasterSecret)：",
+  "服务器端使用 curve25519 将客户端公钥乘以自己的私钥。该 32 字节的结果为(称为 PreMasterSecret)：",
   {
     "Tag": "pre",
     "props": {
@@ -51,10 +51,11 @@
   {
     "Tag": "CodeSample",
     "props": {
-      "code": "$ gcc -o curve25519-mult curve25519-mult.c\n$ ./curve25519-mult client-ephemeral-private.key                     server-ephemeral-public.key | hexdump\n\n0000000 df 4a 29 1b aa 1e b7 cf a6 93 4b 29 b4 74 ba ad\n0000010 26 97 e2 9f 1f 92 0d cc 77 c8 a0 a0 88 44 76 24"
+      "code": "$ gcc -o curve25519-mult curve25519-mult.c\n$ ./curve25519-mult server-ephemeral-private.key \\\n                    client-ephemeral-public.key | hexdump\n\n0000000 df 4a 29 1b aa 1e b7 cf a6 93 4b 29 b4 74 ba ad\n0000010 26 97 e2 9f 1f 92 0d cc 77 c8 a0 a0 88 44 76 24"
     }
   },
-  "然后，客户端需要使用以下方法从 PreMasterSecret 中计算出 48 字节的主密钥(MasterSecret)：",
+  "这与客户端计算得到的 PreMasterSecret 是一致的，因此下面的计算也一样。",
+  "然后，服务器端需要使用以下方法从 PreMasterSecret 中计算出 48 字节的主密钥(MasterSecret)：",
   {
     "Tag": "pre",
     "children": [
@@ -96,7 +97,7 @@
   {
     "Tag": "CodeSample",
     "props": {
-      "code": "### continued from above command line example\n### set up our MasterSecret as a hex string\n$ mshex=$(hexdump -ve '/1 \"%02x\"' /tmp/mastersecret)\n### build the seed\n$ echo -en 'key expansion' > /tmp/seed\n$ cat /tmp/s_rand /tmp/c_rand >> /tmp/seed\n### a0 is the same as the seed\n$ cat /tmp/seed > /tmp/a0\n### a(n) is hmac-sha256(key=secret, data=a(n-1))\n$ cat /tmp/a0 | openssl dgst -sha256 \\\n   -mac HMAC -macopt hexkey:$mshex -binary > /tmp/a1\n$ cat /tmp/a1 | openssl dgst -sha256 \\\n   -mac HMAC -macopt hexkey:$mshex -binary > /tmp/a2\n$ cat /tmp/a2 | openssl dgst -sha256 \\\n   -mac HMAC -macopt hexkey:$mshex -binary > /tmp/a3\n$ cat /tmp/a3 | openssl dgst -sha256 \\\n   -mac HMAC -macopt hexkey:$mshex -binary > /tmp/a4\n### p(n) is hmac-sha256(key=secret, data=a(n)+seed)\n$ cat /tmp/a1 /tmp/seed | openssl dgst -sha256 \\\n   -mac HMAC -macopt hexkey:$mshex -binary > /tmp/p1\n$ cat /tmp/a2 /tmp/seed | openssl dgst -sha256 \\\n   -mac HMAC -macopt hexkey:$mshex -binary > /tmp/p2\n$ cat /tmp/a3 /tmp/seed | openssl dgst -sha256 \\\n   -mac HMAC -macopt hexkey:$mshex -binary > /tmp/p3\n$ cat /tmp/a4 /tmp/seed | openssl dgst -sha256 \\\n   -mac HMAC -macopt hexkey:$mshex -binary > /tmp/p4\n### combine them into a single stream\n$ cat /tmp/p1 /tmp/p2 /tmp/p3 /tmp/p4 > /tmp/p\n$ dd if=/tmp/p of=/tmp/client_mac_key bs=1 skip=0  count=20\n$ dd if=/tmp/p of=/tmp/server_mac_key bs=1 skip=20 count=20\n$ dd if=/tmp/p of=/tmp/client_key     bs=1 skip=40 count=16\n$ dd if=/tmp/p of=/tmp/server_key     bs=1 skip=56 count=16\n$ dd if=/tmp/p of=/tmp/client_iv      bs=1 skip=72 count=16\n$ dd if=/tmp/p of=/tmp/server_iv      bs=1 skip=88 count=16\n$ hexdump /tmp/client_mac_key\n0000000 1b 7d 11 7c 7d 5f 69 0b c2 63 ca e8 ef 60 af 0f\n0000010 18 78 ac c2\n\n$ hexdump /tmp/server_mac_key\n0000000 2a d8 bd d8 c6 01 a6 17 12 6f 63 54 0e b2 09 06\n0000010 f7 81 fa d2\n\n$ hexdump /tmp/client_key\n0000000 f6 56 d0 37 b1 73 ef 3e 11 16 9f 27 23 1a 84 b6\n\n$ hexdump /tmp/server_key\n0000000 75 2a 18 e7 a9 fc b7 cb cd d8 f9 8d d8 f7 69 eb\n\n$ hexdump /tmp/client_iv\n0000000 a0 d2 55 0c 92 38 ee bf ef 5c 32 25 1a bb 67 d6\n\n$ hexdump /tmp/server_iv\n0000000 43 45 28 db 49 37 d5 40 d3 93 13 5e 06 a1 1b b8"
+      "code": "### continued from above command line example\n### set up our MasterSecret as a hex string\n$ mshex=$(hexdump -ve '/1 \"%02x\"' /tmp/mastersecret)\n### build the seed\n$ echo -en 'key expansion' > /tmp/seed\n$ cat /tmp/s_rand /tmp/c_rand >> /tmp/seed\n### a0 is the same as the seed\n$ cat /tmp/seed > /tmp/a0\n### a(n) is hmac-sha256(key=secret, data=a(n-1))\n$ cat /tmp/a0 | openssl dgst -sha256 \\\n   -mac HMAC -macopt hexkey:$mshex -binary > /tmp/a1\n$ cat /tmp/a1 | openssl dgst -sha256 \\\n   -mac HMAC -macopt hexkey:$mshex -binary > /tmp/a2\n$ cat /tmp/a2 | openssl dgst -sha256 \\\n   -mac HMAC -macopt hexkey:$mshex -binary > /tmp/a3\n$ cat /tmp/a3 | openssl dgst -sha256 \\\n   -mac HMAC -macopt hexkey:$mshex -binary > /tmp/a4\n### p(n) is hmac-sha256(key=secret, data=a(n)+seed)\n$ cat /tmp/a1 /tmp/seed | openssl dgst -sha256 \\\n   -mac HMAC -macopt hexkey:$mshex -binary > /tmp/p1\n$ cat /tmp/a2 /tmp/seed | openssl dgst -sha256 \\\n   -mac HMAC -macopt hexkey:$mshex -binary > /tmp/p2\n$ cat /tmp/a3 /tmp/seed | openssl dgst -sha256 \\\n   -mac HMAC -macopt hexkey:$mshex -binary > /tmp/p3\n$ cat /tmp/a4 /tmp/seed | openssl dgst -sha256 \\\n   -mac HMAC -macopt hexkey:$mshex -binary > /tmp/p4\n$ cat /tmp/p1 /tmp/p2 /tmp/p3 /tmp/p4 > /tmp/p\n$ dd if=/tmp/p of=/tmp/client_mac_key bs=1 skip=0  count=20\n$ dd if=/tmp/p of=/tmp/server_mac_key bs=1 skip=20 count=20\n$ dd if=/tmp/p of=/tmp/client_key     bs=1 skip=40 count=16\n$ dd if=/tmp/p of=/tmp/server_key     bs=1 skip=56 count=16\n$ dd if=/tmp/p of=/tmp/client_iv      bs=1 skip=72 count=16\n$ dd if=/tmp/p of=/tmp/server_iv      bs=1 skip=88 count=16\n$ hexdump /tmp/client_mac_key\n0000000 1b 7d 11 7c 7d 5f 69 0b c2 63 ca e8 ef 60 af 0f\n0000010 18 78 ac c2\n\n$ hexdump /tmp/server_mac_key\n0000000 2a d8 bd d8 c6 01 a6 17 12 6f 63 54 0e b2 09 06\n0000010 f7 81 fa d2\n\n$ hexdump /tmp/client_key\n0000000 f6 56 d0 37 b1 73 ef 3e 11 16 9f 27 23 1a 84 b6\n\n$ hexdump /tmp/server_key\n0000000 75 2a 18 e7 a9 fc b7 cb cd d8 f9 8d d8 f7 69 eb\n\n$ hexdump /tmp/client_iv\n0000000 a0 d2 55 0c 92 38 ee bf ef 5c 32 25 1a bb 67 d6\n\n$ hexdump /tmp/server_iv\n0000000 43 45 28 db 49 37 d5 40 d3 93 13 5e 06 a1 1b b8"
     }
   },
   "由此我们可以得到以下密钥以及向量：",
