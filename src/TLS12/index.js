@@ -65,7 +65,7 @@ const data = {
     {
       type: "RecOuter",
       tags: ["record", "server"],
-      label: "服务器端握手完成",
+      label: "ServerHello完成",
       json: () => import("./serverHelloDone.json"),
     },
     {
