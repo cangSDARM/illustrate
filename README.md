@@ -15,5 +15,5 @@
 
 - [x] QUIC
 - [x] DTLS
-- [ ] TLS 1.2
+- [x] TLS 1.2
 - [ ] TLS 1.3

@@ -136,6 +136,24 @@ const data = {
       label: "服务器端握手完成",
       json: () => import("./serverHandshakeFinished.json"),
     },
+    {
+      type: "RecOuter",
+      tags: ["record", "client"],
+      label: "客户端发送会话数据",
+      json: () => import("./clientApplicationData.json"),
+    },
+    {
+      type: "RecOuter",
+      tags: ["record", "server"],
+      label: "服务器端响应客户端的会话数据",
+      json: () => import("./serverApplicationData.json"),
+    },
+    {
+      type: "RecOuter",
+      tags: ["record", "client"],
+      label: "客户端连接关闭通知(close notify)",
+      json: () => import("./clientCloseNotify.json"),
+    },
   ],
   ending: {
     mother: "https://tls12.xargs.org/",

@@ -1,0 +1,112 @@
+[
+  "此时客户端和服务器就可以开始正式的 TLS 1.2 会话了。",
+  "客户端首先发送它的数据，字符串\"ping\"。",
+  {
+    "Tag": "AnnotationToggler"
+  },
+  {
+    "Tag": "Annotations",
+    "props": {
+      "type": "record-data",
+      "data": [
+        [
+          "记录头",
+          {
+            "props": {
+              "className": "bytes"
+            },
+            "content": "17 03 03 00 30"
+          },
+          [
+            "TLS 会话被分解成 \"记录\"(record) 的形式发送和接收。记录是具有类型、协议版本和长度的数据块。",
+            {
+              "Tag": "ul",
+              "children": [
+                {
+                  "Tag": "li",
+                  "content": "17 - 表示 TLS 记录类型 0x17(23, application data)"
+                },
+                {
+                  "Tag": "li",
+                  "content": "03 03 - 协议版本 (3.3, 即 TLS 1.2)"
+                },
+                {
+                  "Tag": "li",
+                  "content": "00 30 - 紧接着的数组载荷长度 0x30(48) 字节"
+                }
+              ]
+            }
+          ]
+        ],
+        [
+          "加密向量",
+          {
+            "props": {
+              "className": "bytes"
+            },
+            "content": "00 01 02 03 04 05 06 07 08 09 0a 0b 0c 0d 0e 0f"
+          },
+          [
+            "客户端发送一个用于解密这个区块的初始化向量。因为我们的数据是可预测的(we have overridden the rand function)，因此它也是一个可预测的序列。"
+          ]
+        ],
+        [
+          "加密的数据载荷",
+          {
+            "props": {
+              "className": "bytes encrypted"
+            },
+            "content": "6c 42 1c 71 c4 2b 18 3b fa 06 19 5d 13 3d 0a 09 d0 0f c7 cb 4e 0f 5d 1c da 59 d1 47 ec 79 0c 99"
+          },
+          [
+            "这个数据是用客户端的写时密钥加密的。因为它包含一个消息验证码(MAC)和填充字节，所以它比解密后的数据要大一截。"
+          ]
+        ]
+      ]
+    }
+  },
+  {
+    "Tag": "Annotations",
+    "props": {
+      "data": [
+        [
+          "",
+          {
+            "props": {
+              "className": "decryption-header"
+            },
+            "content": "解密后的数据载荷"
+          },
+          [
+            { "Tag": "h4", "content": "解密" },
+            "数据被 \"客户端生成会话密钥\" 步骤中产生的写时密钥和该记录开头所携带的初始向量(IVs)加密。",
+            {
+              "Tag": "CodeSample",
+              "props": {
+                "code": "### client key\n$ hexkey=f656d037b173ef3e11169f27231a84b6\n### IV for this record\n$ hexiv=000102030405060708090a0b0c0d0e0f\n### encrypted data\n$ echo '6c 42 1c 71 c4 2b 18 3b fa 06 19 5d 13 3d 0a 09'  > /tmp/msg1\n$ echo 'd0 0f c7 cb 4e 0f 5d 1c da 59 d1 47 ec 79 0c 99' >> /tmp/msg1\n$ xxd -r -p /tmp/msg1 \\\n  | openssl enc -d -nopad -aes-128-cbc -K $hexkey -iv $hexiv | hexdump\n\n0000000 70 69 6e 67 60 10 12 49 f7 4a 03 77 c9 ca cf 63\n0000010 09 75 13 70 d8 0c fc aa 07 07 07 07 07 07 07 07\n\nThe last 28 bytes contain a 20-byte MAC and padding to bring the data to a\nmultiple of 16 bytes.  The 20-byte MAC can be reproduced as follows:\n\n### from https://tools.ietf.org/html/rfc2246#section-6.2.3.1\n$ sequence='0000000000000001'\n$ rechdr='17 03 03'\n$ datalen='00 04'\n$ data='70 69 6e 67'\n### from \"Encryption Keys Calculation\"\n$ mackey=1b7d117c7d5f690bc263cae8ef60af0f1878acc2\n$ echo $sequence $rechdr $datalen $data | xxd -r -p \\\n  | openssl dgst -sha1 -mac HMAC -macopt hexkey:$mackey\n\n60101249f74a0377c9cacf6309751370d80cfcaa"
+              }
+            }
+          ]
+        ]
+      ]
+    }
+  },
+  {
+    "Tag": "Annotations",
+    "props": {
+      "type": "record-data",
+      "data": [
+        [
+          "数据载荷",
+          {
+            "props": {
+              "className": "bytes encrypted"
+            },
+            "content": "70 69 6e 67"
+          },
+          ["字符串\"ping\""]
+        ]
+      ]
+    }
+  }
+]
