@@ -6,8 +6,9 @@
 
 - https://quic.xargs.org/
 - https://dtls.xargs.org/
-- https://tls13.xargs.org/
 - https://tls12.xargs.org/
+- https://tls13.xargs.org/
+- https://x25519.xargs.org/
 
 原作者 [syncsynchalt](https://github.com/syncsynchalt), 译者 [AllenLee](https://github.com/cangSDARM)
 
@@ -17,3 +18,4 @@
 - [x] DTLS
 - [x] TLS 1.2
 - [ ] TLS 1.3
+- [ ] x25519
