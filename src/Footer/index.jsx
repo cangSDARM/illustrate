@@ -1,6 +1,6 @@
 import React from "react";
 
-const Footer = ({ desc, mother }) => {
+const Footer = ({ desc, mother, references }) => {
   return (
     <>
       <div>
@@ -33,6 +33,26 @@ const Footer = ({ desc, mother }) => {
           </a>
         </p>
       </div>
+      {references && (
+        <div>
+          <dl
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              maxWidth: "80vw",
+              margin: "0 auto",
+            }}
+          >
+            <span style={{ alignSelf: "start" }}>参考：</span>
+            {references.map((ref) => (
+              <li key={ref.title}>
+                {ref.title}：<a href={ref.href}>{ref.href}</a>
+                {ref.quote}
+              </li>
+            ))}
+          </dl>
+        </div>
+      )}
     </>
   );
 };

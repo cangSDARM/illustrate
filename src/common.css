@@ -92,6 +92,10 @@ dl {
   margin: 1rem 0;
 }
 
+dl {
+  list-style-type: circle;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
