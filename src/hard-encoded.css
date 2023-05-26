@@ -41,7 +41,7 @@ code.longboi {
 .bytes::after {
   content: " ";
   width: 1ex;
-  display: inline-block;
+  display: inline;
 }
 .bytes.protected {
   color: var(--prot-text);
