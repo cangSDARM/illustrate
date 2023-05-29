@@ -64,11 +64,12 @@ pre code {
 }
 
 code {
-  background-color: #e5e2e0;
+  background-color: #e6eaed;
   margin: 0 0.2em;
   padding: 0.1em;
   border-radius: 0.3em;
   white-space: normal;
+  word-break: break-word;
 }
 
 table {

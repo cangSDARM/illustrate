@@ -50,6 +50,28 @@ const data = {
       },
       json: () => import("./serverHello.json"),
     },
+    {
+      type: "RecOuter",
+      tags: ["calculation", "server"],
+      label: "服务器端生成握手密钥",
+      illustration: {
+        src: "https://quic.xargs.org/images/key9.png",
+        width: "97",
+        height: "250",
+      },
+      json: () => import("./serverHandshakeKeysCalc.json"),
+    },
+    {
+      type: "RecOuter",
+      tags: ["calculation", "client"],
+      label: "客户端生成握手密钥",
+      illustration: {
+        src: "https://quic.xargs.org/images/key8.png",
+        width: "97",
+        height: "250",
+      },
+      json: () => import("./clientHandshakeKeysCalc.json"),
+    },
   ],
   ending: {
     mother: "https://tls13.xargs.org/",
@@ -57,6 +79,10 @@ const data = {
       {
         title: "TLS Parameters",
         href: "https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml",
+      },
+      {
+        title: "TLS 1.3 RFC",
+        href: "https://www.ietf.org/rfc/rfc8446.html",
       },
       {
         title: "OpenSSL 邮件列表: 如何在 ClientHello 中关闭 EC Point Formats",
