@@ -109,6 +109,7 @@ const data = {
       tags: ["record", "server", "embedded"],
       label: "服务器端证书",
       json: () => import("./serverCertificate.json"),
+    },
   ],
   ending: {
     mother: "https://tls13.xargs.org/",
