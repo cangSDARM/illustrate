@@ -110,6 +110,42 @@ const data = {
       label: "服务器端证书",
       json: () => import("./serverCertificate.json"),
     },
+    {
+      type: "RecOuter",
+      tags: ["record", "server"],
+      label: "服务器端伪装记录",
+      id: "wrappedRecord3",
+      illustration: {
+        src: "https://quic.xargs.org/images/key5.png",
+        width: "124",
+        height: "250",
+      },
+      json: () => import("./wrappedRecord3.json"),
+    },
+    {
+      type: "RecOuter",
+      tags: ["record", "server", "embedded"],
+      label: "服务器端证书验证数据",
+      json: () => import("./serverCertVerify.json"),
+    },
+    {
+      type: "RecOuter",
+      tags: ["record", "server"],
+      label: "服务器端伪装记录",
+      id: "wrappedRecord4",
+      illustration: {
+        src: "https://quic.xargs.org/images/key5.png",
+        width: "124",
+        height: "250",
+      },
+      json: () => import("./wrappedRecord4.json"),
+    },
+    {
+      type: "RecOuter",
+      tags: ["record", "server", "embedded"],
+      label: "服务器端握手完成",
+      json: () => import("./serverHandshakeFinished.json"),
+    },
   ],
   ending: {
     mother: "https://tls13.xargs.org/",
