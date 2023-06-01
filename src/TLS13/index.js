@@ -162,6 +162,10 @@ const data = {
         title: "OpenSSL 邮件列表: 如何在 ClientHello 中关闭 EC Point Formats",
         href: "https://mta.openssl.org/pipermail/openssl-users/2019-November/011572.html",
       },
+      {
+        title: "为何 openssl -enc 不支持 AEAD?",
+        href: "https://github.com/openssl/openssl/issues/12220",
+      },
     ],
   },
 };

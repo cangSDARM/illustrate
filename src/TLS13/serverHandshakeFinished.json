@@ -12,7 +12,7 @@
           "握手消息头",
           {
             "props": {
-              "className": "bytes encrypted"
+              "className": "bytes"
             },
             "content": "14 00 00 30"
           },
@@ -37,7 +37,7 @@
           "验证数据",
           {
             "props": {
-              "className": "bytes encrypted"
+              "className": "bytes"
             },
             "content": "7e 30 ee cc b6 b2 3b e6 c6 ca 36 39 92 e8 42 da 87 7e e6 47 15 ae 7f c0 cf 87 f9 e5 03 21 82 b5 bb 48 d1 e3 3f 99 79 05 5a 16 0c 8d bb b1 56 9c"
           },
