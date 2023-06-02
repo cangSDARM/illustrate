@@ -146,6 +146,47 @@ const data = {
       label: "服务器端握手完成",
       json: () => import("./serverHandshakeFinished.json"),
     },
+    {
+      type: "RecOuter",
+      tags: ["calculation", "server"],
+      label: "服务器端生成会话密钥(application keys)",
+      illustration: {
+        src: "https://quic.xargs.org/images/key9.png",
+        width: "97",
+        height: "250",
+      },
+      json: () => import("./serverApplicationKeysCalc.json"),
+    },
+    {
+      type: "RecOuter",
+      tags: ["calculation", "client"],
+      label: "客户端生成会话密钥",
+      illustration: {
+        src: "https://quic.xargs.org/images/key8.png",
+        width: "97",
+        height: "250",
+      },
+      json: () => import("./clientApplicationKeysCalc.json"),
+    },
+    {
+      type: "RecOuter",
+      tags: ["record", "client"],
+      label: "客户端秘钥规格变更",
+      json: () => import("./clientChangeCipherSpec.json"),
+    },
+    {
+      type: "RecOuter",
+      tags: ["record", "client"],
+      label: "客户端伪装记录",
+      id: "wrappedRecord5",
+      json: () => import("./wrappedRecord5.json"),
+    },
+    {
+      type: "RecOuter",
+      tags: ["record", "client", "embedded"],
+      label: "客户端握手完成",
+      json: () => import("./clientHandshakeFinished.json"),
+    },
   ],
   ending: {
     mother: "https://tls13.xargs.org/",
