@@ -187,6 +187,19 @@ const data = {
       label: "客户端握手完成",
       json: () => import("./clientHandshakeFinished.json"),
     },
+    {
+      type: "RecOuter",
+      tags: ["record", "client"],
+      label: "客户端伪装记录",
+      id: "wrappedRecord6",
+      json: () => import("./wrappedRecord6.json"),
+    },
+    {
+      type: "RecOuter",
+      tags: ["record", "client", "embedded"],
+      label: "客户端会话数据",
+      json: () => import("./clientApplicationData.json"),
+    },
   ],
   ending: {
     mother: "https://tls13.xargs.org/",
@@ -206,6 +219,10 @@ const data = {
       {
         title: "为何 openssl -enc 不支持 AEAD?",
         href: "https://github.com/openssl/openssl/issues/12220",
+      },
+      {
+        title: "TLS 1.3 的伪装相关",
+        href: "https://github.com/openssl/openssl/issues/17654#issuecomment-1031744534",
       },
     ],
   },
