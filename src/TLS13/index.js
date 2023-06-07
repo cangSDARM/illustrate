@@ -2,7 +2,7 @@ const data = {
   intro: {
     title: "图解 TLS 1.3 连接",
     subtitle: "对每一个字节的解释和再现",
-    desc: '这里演示的连接是开启"中间件兼容模式"后的效果。具体内容请查看注释。',
+    desc: '这里演示的连接是基于 OpenSSL 3.0.1 并开启"中间件兼容模式"后的效果。具体内容请查看注释。',
     intro:
       '在这个演示中，客户端通过 TLS 1.3 加密协商连接服务器。客户端发送"ping"、接收"pong"后终止连接。点击下面开始探索。',
   },
@@ -199,6 +199,45 @@ const data = {
       tags: ["record", "client", "embedded"],
       label: "客户端会话数据",
       json: () => import("./clientApplicationData.json"),
+    },
+    {
+      type: "RecOuter",
+      tags: ["record", "server"],
+      label: "服务器端伪装记录",
+      id: "wrappedRecord7",
+      json: () => import("./wrappedRecord7.json"),
+    },
+    {
+      type: "RecOuter",
+      tags: ["record", "server", "embedded"],
+      label: "服务器端第一个会话记录单(New Session Ticket 1)",
+      json: () => import("./serverNewSessionTicket1.json"),
+    },
+    {
+      type: "RecOuter",
+      tags: ["record", "server"],
+      label: "服务器端伪装记录",
+      id: "wrappedRecord8",
+      json: () => import("./wrappedRecord8.json"),
+    },
+    {
+      type: "RecOuter",
+      tags: ["record", "server", "embedded"],
+      label: "服务器端第二个会话记录单(New Session Ticket 2)",
+      json: () => import("./serverNewSessionTicket2.json"),
+    },
+    {
+      type: "RecOuter",
+      tags: ["record", "server"],
+      label: "服务器端伪装记录",
+      id: "wrappedRecord9",
+      json: () => import("./wrappedRecord9.json"),
+    },
+    {
+      type: "RecOuter",
+      tags: ["record", "server", "embedded"],
+      label: "服务器会话数据",
+      json: () => import("./serverApplicationData.json"),
     },
   ],
   ending: {

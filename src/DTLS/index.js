@@ -158,7 +158,7 @@ const data = {
   ],
   ending: {
     mother: "https://dtls.xargs.org/",
-    desc: "你可能也对 <a href='https://tls13.xargs.org/' target='_blank'>TLS 1.3</a> 的内容感兴趣。",
+    desc: "你可能也对 <a href='/illustrate/tls13' target='_blank'>TLS 1.3</a> 的内容感兴趣。",
   },
 };
 

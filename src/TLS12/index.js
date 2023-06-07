@@ -157,7 +157,7 @@ const data = {
   ],
   ending: {
     mother: "https://tls12.xargs.org/",
-    desc: "你可能也对更新的 <a href='https://tls13.xargs.org/' target='_blank'>TLS 1.3</a> 的内容感兴趣。",
+    desc: "你可能也对更新的 <a href='/illustrate/tls13' target='_blank'>TLS 1.3</a> 的内容感兴趣。",
     references: [
       {
         title: "TLS Parameters",

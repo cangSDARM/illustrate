@@ -1,0 +1,165 @@
+[
+  "为了减少连接被无法识别新 TLS 协议的中间件阻断的问题，加密的 TLS 1.3 记录都需要伪装成一个会话恢复成功的 TLS 1.2 会话记录(之所以不是伪装成握手记录，因为握手记录过长会使得兼容实现变得异常复杂)。",
+  "包装的实际记录内容将在下面单独列出。",
+  {
+    "Tag": "AnnotationToggler"
+  },
+  {
+    "Tag": "Annotations",
+    "props": {
+      "type": "record-data",
+      "data": [
+        [
+          "记录头",
+          {
+            "props": {
+              "className": "bytes"
+            },
+            "content": "17 03 03 00 ea"
+          },
+          [
+            "此 TLS 1.3 记录被伪装为 TLS 1.2 的\"会话记录\"。因此内容会以会话记录的规格展示。",
+            {
+              "Tag": "ul",
+              "children": [
+                {
+                  "Tag": "li",
+                  "content": "17 - 表示 TLS 记录类型 0x17(23, application data)"
+                },
+                {
+                  "Tag": "li",
+                  "content": "03 03 - 协议版本 (3.3, 即 TLS 1.2)"
+                },
+                {
+                  "Tag": "li",
+                  "content": "00 ea - 紧接着的数组载荷长度 0x0ea(234) 字节"
+                }
+              ]
+            }
+          ]
+        ],
+        [
+          "加密的数据载荷",
+          {
+            "props": {
+              "className": "bytes encrypted"
+            },
+            "content": "38 2d 8c 19 a4 7f 4e 8d 9b 0c 51 0b c3 48 db 2c c9 9b 24 1c d0 d1 8b 31 d0 ca 1a c1 2d c1 e3 03 c5 8d 0c 7e 9e 27 29 4c 6b 0e 31 98 f7 d3 19 eb 14 62 2e c4 8b 6a c8 f8 66 d7 49 4f a7 75 c8 80 ff 43 ad 4b 1a f5 3a 03 ca 19 77 95 77 8f ff 2f fe 1d 3b 99 b3 4d e7 82 a7 6a bf a8 40 e6 36 6c d7 34 9d 9b cf f6 41 f5 e0 df f9 5e 40 d7 2e 09 ef fe 18 ee 64 67 2c b9 60 05 40 44 88 ad 18 96 c4 4a 5f d1 74 99 8e 9b 00 94 d8 e6 d8 4d 29 29 b7 88 3d c9 a3 c3 c7 31 3a 87 29 3f 31 b6 1d 24 d9 90 97 c8 85 3b fb eb 95 d1 d0 1f 99 ca 05 b0 50 18 59 cf 63 40 e8 37 70 75 97 01 52 fa 94 f5 f5 be 29 06 e7 2a 15 e4 08 36 a4 1f 4c d3 db e7 d5 13 c1 6e 88 61 1d 3e ae 93"
+          },
+          ["这个数据是用服务器端的会话时密钥加密的。"]
+        ],
+        [
+          "AEAD 鉴别标签",
+          {
+            "props": {
+              "className": "bytes"
+            },
+            "content": "38 d9 db 1f 91 ca 3d 58 42 60 2a 61 0b 43 a4 63"
+          },
+          [
+            {
+              "children": [
+                "这是 ",
+                {
+                  "Tag": "a",
+                  "props": {
+                    "href": "https://zhuanlan.zhihu.com/p/28566058"
+                  },
+                  "content": "AEAD 算法"
+                },
+                "的鉴别标签，用以确认加密数据和数据包头的完整性。它由加密算法产生，并由解密算法消耗。"
+              ]
+            }
+          ]
+        ]
+      ]
+    }
+  },
+  {
+    "Tag": "Annotations",
+    "props": {
+      "data": [
+        [
+          "",
+          {
+            "props": {
+              "className": "decryption-header"
+            },
+            "content": "解密后的数据载荷"
+          },
+          [
+            { "Tag": "h4", "content": "解密" },
+            "数据被 \"服务器端生成会话密钥\" 步骤中产生的握手时密钥和握手时向量(IVs)加密。IVs 通过密钥和已经用密钥加密的记录长度进行异或操作生成。在例子中 IV 为 0。",
+            "数据包开头的 5 字节(记录头)还会作为解密过程解密成功时必须满足的认证条件。",
+            {
+              "children": [
+                "openssl 命令行工具还不支持 AEAD 算法加解密(AEAD ciphers)，你可以使用作者的命令行工具来",
+                {
+                  "Tag": "a",
+                  "props": {
+                    "href": "https://tls13.xargs.org/files/aes_256_gcm_decrypt.c"
+                  },
+                  "content": "解密"
+                },
+                "和",
+                {
+                  "Tag": "a",
+                  "props": {
+                    "href": "https://tls13.xargs.org/files/aes_256_gcm_encrypt.c"
+                  },
+                  "content": "加密"
+                },
+                "这些数据。"
+              ]
+            },
+            {
+              "Tag": "CodeSample",
+              "props": {
+                "code": "### from the \"Server Application Keys Calc\" step\n$ key=01f78623f17e3edcc09e944027ba3218d57c8e0db93cd3ac419309274700ac27\n$ iv=196a750b0c5049c0cc51a541\n### from this record\n$ recdata=17030300ea\n$ authtag=38d9db1f91ca3d5842602a610b43a463\n$ recordnum=0\n### may need to add -I and -L flags for include and lib dirs\n$ cc -o aes_256_gcm_decrypt aes_256_gcm_decrypt.c -lssl -lcrypto\n$ echo \"38 2d 8c 19 a4 7f 4e 8d 9b 0c 51 0b c3 48 db 2c c9 9b 24\n  ... snip ...\n  13 c1 6e 88 61 1d 3e ae 93\" | xxd -r -p > /tmp/msg5\n$ cat /tmp/msg5 \\\n  | ./aes_256_gcm_decrypt $iv $recordnum $key $recdata $authtag \\\n  | hexdump -C\n\n00000000  04 00 00 d5 00 00 1c 20  00 00 00 00 08 00 00 00  |....... ........|\n00000010  00 00 00 00 00 00 c0 41  42 43 44 45 46 47 48 49  |.......ABCDEFGHI|\n... snip ..."
+              }
+            }
+          ]
+        ]
+      ]
+    }
+  },
+  {
+    "Tag": "Annotations",
+    "props": {
+      "type": "record-data",
+      "data": [
+        [
+          "加密的数据载荷",
+          {
+            "props": {
+              "className": "bytes encrypted"
+            },
+            "content": "04 00 00 d5 00 00 1c 20 00 00 00 00 08 00 00 00 00 00 00 00 00 00 c0 41 42 43 44 45 46 47 48 49 4a 4b 4c 4d 4e 4f 00 49 56 44 41 54 41 49 56 44 41 54 41 00 41 45 53 cb 11 9d 4d bd 2a 21 ec c2 26 a6 09 0e e8 ca 58 df 09 03 9b 35 96 f4 de 79 98 0e a3 25 d5 14 62 5c 0c 21 c5 0f 03 26 1d c4 2c e7 c5 97 0c 4c 01 ea 33 1c ff c8 99 66 ef 54 8b e4 df 9a 8b a4 38 5b eb 86 80 fd 0b 78 df b8 e9 8e fc 8f cc d8 14 fe cd 1d 9b ce 89 ca 05 dc 28 c2 49 e5 bd 61 d0 3a 56 8f 9a 0a 46 fb fd 05 30 2d b6 b2 f7 a3 13 e3 32 67 bf 0b cb dc ec fb 04 a4 d8 2f 5a 69 45 1f 56 7a b5 19 9b b2 6c 5c f2 00 72 f0 45 03 73 02 8f e0 71 d4 f4 1d 8f 61 ae 02 4d 69 bb ae 4c 00 00"
+          },
+          ["该载荷的解释详见下面的\"服务器端第一个会话记录单\"部分"]
+        ],
+        [
+          "记录类型",
+          {
+            "props": {
+              "className": "bytes encrypted"
+            },
+            "content": "16"
+          },
+          [
+            "每一个伪装的 TLS 1.3 记录的最后一个字节都需要表明其真正的记录类型",
+            {
+              "Tag": "ul",
+              "children": [
+                {
+                  "Tag": "li",
+                  "content": "16 - 类型为 0x16(22, handshake record)"
+                }
+              ]
+            }
+          ]
+        ]
+      ]
+    }
+  }
+]

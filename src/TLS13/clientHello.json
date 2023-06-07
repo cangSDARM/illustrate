@@ -419,7 +419,7 @@
                 {
                   "Tag": "a",
                   "props": {
-                    "href": "https://words.filippo.io/we-need-to-talk-about-session-tickets/"
+                    "href": "https://halfrost.com/tls_1-3_0-rtt/"
                   },
                   "content": "破坏了 TLS 的安全模型。"
                 }
