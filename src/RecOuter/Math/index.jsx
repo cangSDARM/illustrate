@@ -44,8 +44,9 @@ const resolver = (equation) => {
       shiftIndex: () => curIdx,
     };
   };
+
   const typeTracker = (initType = Types.Normal) => {
-    const types = [initType];
+    let types = [initType];
 
     return {
       nextType: (type) => types.push(type),
