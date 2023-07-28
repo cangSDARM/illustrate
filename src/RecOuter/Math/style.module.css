@@ -1,0 +1,10 @@
+.math {
+  font-family: "Times New Roman", serif;
+  font-style: oblique;
+}
+.math sup {
+  top: -0.5em;
+}
+.math sub {
+  bottom: -0.25em;
+}

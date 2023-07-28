@@ -59,3 +59,6 @@ code.longboi {
 .bytes.protected.hp-disabled {
   display: none;
 }
+.text-center {
+  text-align: center;
+}

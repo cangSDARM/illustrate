@@ -1,6 +1,7 @@
 import CodeSample from "./CodeSample";
 import Annotations, { AnnotationToggler } from "./Annotations";
 import Table from "./Table";
+import MathBlock from "./Math";
 
 export const renderExplanations = (explanations = [], depth = 0, config) => {
   const DefaultTag = config?.defaultTag || "p";
@@ -33,6 +34,9 @@ export const renderExplanations = (explanations = [], depth = 0, config) => {
         break;
       case "Table":
         Tag = Table;
+        break;
+      case "Math":
+        Tag = MathBlock;
         break;
       case "a":
         expProps.target ||= "_blank";

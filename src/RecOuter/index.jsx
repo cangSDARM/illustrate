@@ -10,7 +10,7 @@ const RecOuter = ({
   id = "",
   label = "",
   illustration,
-  explanation,
+  eagerLoad = false,
   json,
 }) => {
   const { curSlug, changeCurSlug, getSlug } = useSluggerContext();
@@ -20,12 +20,12 @@ const RecOuter = ({
   const [lazyExplanation, setLazyExplanation] = React.useState();
 
   React.useLayoutEffect(() => {
-    if (curSlug === slug) {
+    if (curSlug === slug || eagerLoad) {
       if (!lazyExplanation && typeof json === "function") {
         json().then(setLazyExplanation);
       }
     }
-  }, [curSlug, json]);
+  }, [curSlug, json, eagerLoad]);
 
   React.useEffect(() => {
     if (curSlug === slug) {
@@ -100,10 +100,10 @@ const RecOuter = ({
         )}
         <div className={classes["rec-explanation"]}>
           <AnnotationContextProvider>
-            {!explanation && !lazyExplanation ? (
+            {!lazyExplanation ? (
               <div>Loading...</div>
             ) : (
-              renderExplanations(explanation || lazyExplanation)
+              renderExplanations(lazyExplanation)
             )}
           </AnnotationContextProvider>
         </div>

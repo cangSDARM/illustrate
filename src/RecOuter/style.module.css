@@ -26,7 +26,8 @@
 }
 
 .record,
-.calculation {
+.calculation,
+.stem {
   max-width: 800px;
   padding: 1em;
   border-radius: 1em;
@@ -51,6 +52,11 @@
 .calculation .rec-label:before {
   content: "± ";
   font-weight: bold;
+  color: var(--chunky-text);
+}
+
+.stem .rec-label:before {
+  content: "❡ ";
   color: var(--chunky-text);
 }
 
@@ -100,7 +106,8 @@
 /* ---------------------------------- selected */
 
 .record.selected,
-.calculation.selected {
+.calculation.selected,
+.stem {
   cursor: inherit;
   box-shadow: rgba(0, 0, 0, 0.3) 2px 2px 2px;
 }
@@ -111,7 +118,8 @@
 }
 
 .record.selected .rec-label,
-.calculation.selected .rec-label {
+.calculation.selected .rec-label,
+.stem .rec-label {
   padding: 0 0 10px 0;
   width: 0;
 }
@@ -125,11 +133,13 @@
 }
 
 .record.selected .illustration,
-.calculation.selected .illustration {
+.calculation.selected .illustration,
+.stem .illustration {
   display: block;
 }
 
-.selected .rec-explanation {
+.selected .rec-explanation,
+.stem .rec-explanation {
   display: block;
 }
 /* ---------------------------------- selected */
