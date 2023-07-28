@@ -1,2 +1,0 @@
-("undefined"!=typeof globalThis?globalThis:"undefined"!=typeof self?self:"undefined"!=typeof window?window:"undefined"!=typeof global?global:{}).parcelRequire7f38.register("4nCbr",(function(e,n){e.exports=JSON.parse('["客户端发送数据：字符串\\"ping\\"",{"Tag":"AnnotationToggler"},{"Tag":"Annotations","props":{"type":"record-data","data":[["数据",{"props":{"className":"bytes"},"content":"70 69 6e 67"},["字符串\\"ping\\""]]]}}]')}));
-//# sourceMappingURL=clientApplicationData.b4653ede.js.map
