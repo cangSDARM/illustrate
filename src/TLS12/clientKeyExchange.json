@@ -1,36 +1,6 @@
 [
   "客户端现在可以算出自己的密钥。交换后，双方都可以根据私钥和交换过来的公钥生成共享的加密密钥了。",
-  {
-    "Tag": "p",
-    "children": [
-      "现在双方已经同意使用 ECDHE 的密码加解密算法(ServiceHello 的 TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA)。这意味着密钥对将基于选定的椭圆曲线(",
-      {
-        "Tag": "strong",
-        "content": "E"
-      },
-      "lliptic ",
-      {
-        "Tag": "strong",
-        "content": "C"
-      },
-      "urve)，使用 ",
-      {
-        "Tag": "strong",
-        "content": "D"
-      },
-      "iffie-",
-      {
-        "Tag": "strong",
-        "content": "H"
-      },
-      "ellman，并且密钥对是基于该次连接(",
-      {
-        "Tag": "strong",
-        "content": "E"
-      },
-      "phemeral)，而不是使用证书上的公/私钥。"
-    ]
-  },
+  "现在双方已经同意使用 ECDHE 的密码加解密算法(ServiceHello 的 TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA)。这意味着密钥对将基于选定的椭圆曲线(**E**lliptic **C**urve)，使用 **D**iffie-**H**ellman 编码，并且密钥对是基于该次连接(**E**phemeral)，而不是使用证书上的公/私钥。",
   {
     "Tag": "AnnotationToggler"
   },
