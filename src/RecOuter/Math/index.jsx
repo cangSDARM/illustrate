@@ -4,7 +4,6 @@ import classes from "./style.module.css";
 const Types = {
   Normal: 0,
   NumericalLeading: 1,
-  SingleAlphabet: 2,
   SingleAlphabetOrNumericalLeading: 3,
 };
 
@@ -66,15 +65,15 @@ const resolver = (equation) => {
     pendingContent = [],
     Token = undefined;
 
-  const { shift, shiftIndex } = shiftable(equation);
+  const { shift, shiftIndex, rest } = shiftable(equation);
   const { nextType, curType, handledType, priorType } = typeTracker(
     Types.Normal
   );
 
-  const isNumerical = (str = "") => {
-    const numerical = str.match(/^\d+/i)?.[0];
+  const getNumerical = (str = "") => {
+    const numerical = str.match(/^-?\d+/i)?.[0];
 
-    return !!numerical;
+    return numerical;
   };
 
   const isAlphabet = (str = "") => {
@@ -89,6 +88,18 @@ const resolver = (equation) => {
     if (joint) result.push(<Token key={shiftIndex()}>{joint}</Token>);
   };
 
+  const NumericalLeadingHandler = () => {
+    const numerical = getNumerical(curChar + rest());
+    if (numerical) {
+      if (numerical.length > 1) shift(numerical.length - 1);
+      pendingContent.push(numerical);
+      pendingContentToResult(Token);
+    } else {
+      result.push(curChar);
+    }
+    handledType();
+  };
+
   while (true) {
     curChar = shift();
 
@@ -98,29 +109,9 @@ const resolver = (equation) => {
     }
 
     switch (curType()) {
-      case Types.NumericalLeading: {
-        const numerical = isNumerical(curChar);
-        if (numerical) {
-          pendingContent.push(curChar);
-        }
-        if (!numerical) {
-          pendingContentToResult(Token);
-          handledType();
-          result.push(curChar);
-        }
+      case Types.NumericalLeading:
+        NumericalLeadingHandler();
         break;
-      }
-      case Types.SingleAlphabet: {
-        const alphabet = isAlphabet(curChar);
-        if (alphabet) {
-          pendingContent.push(curChar);
-          pendingContentToResult(Token);
-        } else {
-          result.push(curChar);
-        }
-        handledType();
-        break;
-      }
       case Types.SingleAlphabetOrNumericalLeading: {
         const alphabet = isAlphabet(curChar);
         if (alphabet) {
@@ -128,15 +119,7 @@ const resolver = (equation) => {
           pendingContentToResult(Token);
           handledType();
         } else {
-          const numerical = isNumerical(curChar);
-          if (numerical) {
-            pendingContent.push(curChar);
-          }
-          if (!numerical) {
-            pendingContentToResult(Token);
-            handledType();
-            result.push(curChar);
-          }
+          NumericalLeadingHandler();
         }
         break;
       }

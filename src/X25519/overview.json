@@ -21,7 +21,7 @@
     "children": [
       {
         "Tag": "Math",
-        "content": "k_b@(k_a@P) = k_a@(k_b@P)"
+        "content": "k_b∗(k_a∗P) = k_a∗(k_b∗P)"
       }
     ]
   },
@@ -32,7 +32,7 @@
       [
         {
           "Tag": "Math",
-          "content": "@"
+          "content": "∗"
         },
         ": 椭圆曲线运算"
       ],
@@ -65,26 +65,25 @@
       [
         {
           "Tag": "Math",
-          "content": "k_a@P"
+          "content": "k_a∗P"
         },
         ": Alice 的公钥"
       ],
       [
         {
           "Tag": "Math",
-          "content": "k_b@P"
+          "content": "k_b∗P"
         },
         ": Bob 的公钥"
       ],
       [
         {
           "Tag": "Math",
-          "content": "k_a@k_b@P"
+          "content": "k_a∗k_b∗P"
         },
         ": Alice 和 Bob 共享的密文"
       ]
     ]
   },
-  "可以看出，只要 Alice 和 Bob 有了共享密文后，他们就可以以此为基础，构建足够可信的加密通讯。",
-  "并且由于椭圆曲线的特性，Alice 和 Bob 可以保证连接完成后，对方不会假冒自己。"
+  "可以看出，只要 Alice 和 Bob 有了共享密文后，他们就可以以此为基础，构建足够可信的加密通讯。并且由于椭圆曲线的特性，Alice 和 Bob 可以保证连接完成后，对方不会假冒自己。"
 ]

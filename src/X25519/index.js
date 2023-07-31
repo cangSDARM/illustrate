@@ -13,6 +13,13 @@ const data = {
       eagerLoad: true,
       json: () => import("./overview.json"),
     },
+    {
+      type: "RecOuter",
+      tags: ["server", "stem"],
+      label: "椭圆曲线",
+      eagerLoad: true,
+      json: () => import("./mathOnTheCurve.json"),
+    },
   ],
   ending: {
     mother: "https://x25519.xargs.org/",
