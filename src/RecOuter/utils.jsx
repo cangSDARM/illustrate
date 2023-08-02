@@ -2,7 +2,7 @@ import CodeSample from "./CodeSample";
 import Annotations, { AnnotationToggler } from "./Annotations";
 import Table from "./Table";
 import MathBlock from "./Math";
-import FlexContainer from "./Flex";
+import * as X25519Series from './X25519';
 
 const mdText = (str = "") => {
   const strong = /\*\*(.*?)\*\*/gi;
@@ -24,6 +24,7 @@ const mdText = (str = "") => {
 
 export const renderExplanations = (explanations = [], depth = 0, config) => {
   const DefaultTag = config?.defaultTag || "p";
+  const CommonProps = config?.commonProps || {};
 
   return explanations.map((exp, idx) => {
     if (typeof exp === "string") {
@@ -36,7 +37,7 @@ export const renderExplanations = (explanations = [], depth = 0, config) => {
       Tag: expTag = DefaultTag,
       content: expContent,
       children: expChildren,
-      props: expProps = {},
+      props: expProps = CommonProps,
     } = exp;
 
     let Tag = expTag || "p";
@@ -58,7 +59,10 @@ export const renderExplanations = (explanations = [], depth = 0, config) => {
         Tag = MathBlock;
         break;
       case "Flex":
-        Tag = FlexContainer;
+        Tag = X25519Series.FlexContainer;
+        break;
+      case "Calculator":
+        Tag = X25519Series.Calculator;
         break;
       case "a":
         expProps.target ||= "_blank";

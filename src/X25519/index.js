@@ -2,8 +2,6 @@ const data = {
   intro: {
     title: "图解 X25519 密钥交换算法",
     subtitle: "",
-    desc: "",
-    intro: "",
   },
   sections: [
     {
@@ -19,6 +17,13 @@ const data = {
       label: "椭圆曲线",
       eagerLoad: true,
       json: () => import("./mathOnTheCurve.json"),
+    },
+    {
+      type: "RecOuter",
+      tags: ["server", "stem"],
+      label: "上手试一试",
+      eagerLoad: true,
+      json: () => import("./handsOn.json"),
     },
   ],
   ending: {

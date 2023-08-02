@@ -27,63 +27,69 @@
   },
   "其中：",
   {
-    "Tag": "ul",
-    "children": [
-      [
-        {
-          "Tag": "Math",
-          "content": "∗"
-        },
-        ": 椭圆曲线运算"
-      ],
-      [
-        {
-          "Tag": "Math",
-          "content": "k_a"
-        },
-        ": Alice 的密钥 ~ 即一个 255bit(32byte) 的随机数"
-      ],
-      [
-        {
-          "Tag": "Math",
-          "content": "k_b"
-        },
-        ": Bob 的密钥 ~ 即一个 255bit(32byte) 的随机数"
-      ],
-      [
-        {
-          "Tag": "Math",
-          "content": "P"
-        },
-        ": 椭圆曲线上",
-        {
-          "Tag": "Math",
-          "content": " x = 9 "
-        },
-        "的点"
-      ],
-      [
-        {
-          "Tag": "Math",
-          "content": "k_a∗P"
-        },
-        ": Alice 的公钥"
-      ],
-      [
-        {
-          "Tag": "Math",
-          "content": "k_b∗P"
-        },
-        ": Bob 的公钥"
-      ],
-      [
-        {
-          "Tag": "Math",
-          "content": "k_a∗k_b∗P"
-        },
-        ": Alice 和 Bob 共享的密文"
+    "Tag": "Table",
+    "props": {
+      "style": { "marginLeft": "2rem" },
+      "dataProps": [{ "style": { "textAlign": "right" } }],
+      "data": [
+        [{ "Tag": "Math", "content": "∗" }, ":", "椭圆曲线运算"],
+        [
+          {
+            "Tag": "Math",
+            "content": "k_a"
+          },
+          ":",
+          "Alice 的密钥 ~ 即一个 255bit(32byte) 的随机数"
+        ],
+        [
+          {
+            "Tag": "Math",
+            "content": "k_b"
+          },
+          ":",
+          "Bob 的密钥 ~ 即一个 255bit(32byte) 的随机数"
+        ],
+        [
+          {
+            "Tag": "Math",
+            "content": "P"
+          },
+          ":",
+          [
+            "椭圆曲线上",
+            {
+              "Tag": "Math",
+              "content": " x = 9 "
+            },
+            "的点"
+          ]
+        ],
+        [
+          {
+            "Tag": "Math",
+            "content": "k_a∗P"
+          },
+          ":",
+          "Alice 的公钥"
+        ],
+        [
+          {
+            "Tag": "Math",
+            "content": "k_b∗P"
+          },
+          ":",
+          "Bob 的公钥"
+        ],
+        [
+          {
+            "Tag": "Math",
+            "content": "k_a∗k_b∗P"
+          },
+          ":",
+          "Alice 和 Bob 共享的密文"
+        ]
       ]
-    ]
+    }
   },
   "可以看出，只要 Alice 和 Bob 有了共享密文后，他们就可以以此为基础，构建足够可信的加密通讯。并且由于椭圆曲线的特性，Alice 和 Bob 可以保证连接完成后，对方不会假冒自己。"
 ]

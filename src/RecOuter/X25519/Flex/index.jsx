@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "./style.module.css";
-import { renderExplanations } from "../utils";
+import { renderExplanations } from "../../utils";
 
 const FlexContainer = ({ Right, RightProps = {}, children, ...props }) => {
   return (

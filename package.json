@@ -5,7 +5,8 @@
   "scripts": {
     "start": "parcel index.html",
     "format": "prettier --write \"./src/**/*.{js,jsx,css,scss}\"",
-    "build": "parcel build index.html --public-url ./"
+    "rm:cache": "rimraf .parcel-cache && rimraf ./dist",
+    "build": "npm run rm:cache && parcel build index.html --public-url ./"
   },
   "author": "AllenLee<648384410li@gmail.com>",
   "license": "MIT",
@@ -16,7 +17,8 @@
     "parcel": "^2.8.3",
     "parcel-reporter-static-files-copy": "^1.5.0",
     "prettier": "^2.8.7",
-    "process": "^0.11.10"
+    "process": "^0.11.10",
+    "rimraf": "^5.0.1"
   },
   "dependencies": {
     "clsx": "^1.2.1",

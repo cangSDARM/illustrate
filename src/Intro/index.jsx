@@ -7,17 +7,23 @@ const Intro = ({ title = "", subtitle = "", desc = "", intro = "" }) => {
       <h1>
         <Balancer>{title}</Balancer>
       </h1>
-      <h3>
-        <Balancer>{subtitle}</Balancer>
-      </h3>
-      <h5>
-        <Balancer>{desc}</Balancer>
-      </h5>
-      <div className={classes["intro-block"]}>
-        <p>
-          <Balancer>{intro}</Balancer>
-        </p>
-      </div>
+      {subtitle && (
+        <h3>
+          <Balancer>{subtitle}</Balancer>
+        </h3>
+      )}
+      {desc && (
+        <h5>
+          <Balancer>{desc}</Balancer>
+        </h5>
+      )}
+      {intro && (
+        <div className={classes["intro-block"]}>
+          <p>
+            <Balancer>{intro}</Balancer>
+          </p>
+        </div>
+      )}
     </section>
   );
 };

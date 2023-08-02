@@ -1,0 +1,123 @@
+.calculator {
+  max-width: 48em;
+  display: block;
+  font-size: 14px;
+  margin: 1em auto;
+  padding: 1em;
+  background-color: antiquewhite;
+  border: 2px solid #b6a083;
+  border-radius: 1em;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.calculator table {
+  width: 100%;
+}
+
+.calculator table td {
+  padding: 2px;
+}
+
+.calculator table td:first-child {
+  text-align: right;
+  min-width: 8em;
+}
+
+.calculator button {
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  margin: 2px;
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  font: inherit;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 3px 11px 4px;
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.3);
+  border-radius: 7px;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+  color: #111;
+  border: solid 1px #c5a884;
+  background: bisque;
+  background: linear-gradient(180deg, #f8e8d5 1%, #f5ddc3 100%);
+}
+
+.calculator button:hover {
+  background: bisque;
+  background: linear-gradient(180deg, #f5ddc3 1%, #f8e8d5 100%);
+}
+.calculator button:active {
+  position: relative;
+  top: 1px;
+}
+
+.help-tip {
+  display: inline-block;
+  position: relative;
+  font-size: 75%;
+  top: -0.5em;
+  text-align: center;
+  min-width: 1.4em;
+  color: #444;
+  background-color: #f8e8d5;
+  border-radius: 10px;
+  border: #c5a884 1px solid;
+  user-select: none;
+  cursor: help;
+}
+
+.help-tip[data-tooltip-text]:hover::after {
+  text-align: left;
+  background-color: #000;
+  background-color: rgba(0, 0, 0, 0.7);
+  box-shadow: 0 0 3px 1px rgba(50, 50, 50, 0.4);
+  border-radius: 5px;
+  color: #ffffff;
+  font-size: 12px;
+  content: attr(data-tooltip-text);
+  top: 130%;
+  right: -1em;
+  padding: 7px 12px;
+  position: absolute;
+  width: auto;
+  min-width: 11em;
+  z-index: 9999;
+}
+
+.calculator label {
+  display: inline-block;
+  max-width: 100%;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.calculator input {
+  width: 36em;
+  font-family: "Courier", monospace;
+  letter-spacing: -1px;
+  text-align: right;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  line-height: inherit;
+}
+
+.calculator input:read-only {
+  background-color: transparent;
+  border-color: transparent;
+}
+
+@media (max-width: 700px) {
+  .calculator input {
+    max-width: 25em;
+    text-overflow: ellipsis;
+  }
+}
+
+@media (max-width: 450px) {
+  .calculator input {
+    max-width: 15em;
+    text-overflow: ellipsis;
+  }
+}

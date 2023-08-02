@@ -17,48 +17,48 @@ const TokensRMap = Object.keys(Tokens).reduce(
   {}
 );
 
+const shiftable = (str = "") => {
+  const totalLen = str.length;
+  let curIdx = 0;
+
+  return {
+    shift: (sfLen = 1) => {
+      if (sfLen <= 0) throw RangeError("out of shift range: " + sfLen);
+
+      const ender = Math.min(curIdx + sfLen, totalLen);
+      if (curIdx < totalLen) {
+        const result = str.slice(curIdx, ender);
+        curIdx = ender;
+        return result;
+      }
+      return undefined;
+    },
+    rest: () => {
+      if (curIdx >= totalLen) return undefined;
+      return str.slice(curIdx);
+    },
+    shiftIndex: () => curIdx,
+  };
+};
+
+const typeTracker = (initType = Types.Normal) => {
+  let types = [initType];
+
+  return {
+    nextType: (type) => types.push(type),
+    handledType: () => {
+      if (!types.pop()) {
+        types = [initType];
+      }
+    },
+    curType: () => types[Math.max(types.length - 1, 0)],
+    priorType: () =>
+      types.length - 2 > 0 ? types[types.length - 2] : undefined,
+  };
+};
+
 const resolver = (equation) => {
   if (typeof equation !== "string") return equation;
-
-  const shiftable = (str = "") => {
-    const totalLen = str.length;
-    let curIdx = 0;
-
-    return {
-      shift: (sfLen = 1) => {
-        if (sfLen <= 0) throw RangeError("out of shift range: " + sfLen);
-
-        const ender = Math.min(curIdx + sfLen, totalLen);
-        if (curIdx < totalLen) {
-          const result = str.slice(curIdx, ender);
-          curIdx = ender;
-          return result;
-        }
-        return undefined;
-      },
-      rest: () => {
-        if (curIdx >= totalLen) return undefined;
-        return str.slice(curIdx);
-      },
-      shiftIndex: () => curIdx,
-    };
-  };
-
-  const typeTracker = (initType = Types.Normal) => {
-    let types = [initType];
-
-    return {
-      nextType: (type) => types.push(type),
-      handledType: () => {
-        if (!types.pop()) {
-          types = [initType];
-        }
-      },
-      curType: () => types[Math.max(types.length - 1, 0)],
-      priorType: () =>
-        types.length - 2 > 0 ? types[types.length - 2] : undefined,
-    };
-  };
 
   let result = [],
     curChar = "x",
