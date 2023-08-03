@@ -142,4 +142,14 @@
 .stem .rec-explanation {
   display: block;
 }
+
+.stem img[fit] {
+  display: block;
+  margin: 20px auto 10px;
+  max-width: 70%;
+  max-height: 70%;
+  border: 1px solid #666;
+  box-shadow: rgba(0, 0, 0, 0.3) 2px 2px 2px;
+  border-radius: 10px;
+}
 /* ---------------------------------- selected */

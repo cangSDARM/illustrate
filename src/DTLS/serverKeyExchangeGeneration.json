@@ -6,7 +6,7 @@
       "学习 DTLS 并不需要深入了解，但你可以从",
       {
         "Tag": "a",
-        "props": { "href": "https://x25519.xargs.org/" },
+        "props": { "href": "https://cangsdarm.github.io/illustrate/x25519" },
         "content": "X25519 密钥交换算法"
       },
       "获取涉及到的密钥交换算法的具体解释。"

@@ -1,0 +1,263 @@
+[
+  {
+    "Tag": "QA",
+    "props": {
+      "content": [
+        ["为什么我不能在 openssl 或其他工具中重现这些结果?"],
+        [
+          "在实际的 Curve25519 使用时，私钥会提前做一些细微修改，以此来避免某些特定的攻击(参见 Martin Kleppmann 关于实现 X25519 的论文",
+          {
+            "Tag": "a",
+            "props": {
+              "href": "https://martin.kleppmann.com/papers/curve25519.pdf"
+            },
+            "content": " 4.7 节 \"箝位\"(Clamping)"
+          },
+          ")。因此，下面所列出的五个位(bit)会被强制箝箍到预先确定的值(可以在\"上手试一试\"章节中点击 \"Clamp\" 按钮以检查结果)：",
+          {
+            "Tag": "Table",
+            "props": {
+              "style": { "marginLeft": "2rem", "marginTop": "1rem" },
+              "headers": ["位 bit", "目标值", "缘由"],
+              "data": [
+                [
+                  "0, 1, 2",
+                  "0",
+                  [
+                    "避免",
+                    {
+                      "Tag": "a",
+                      "props": {
+                        "href": "https://www.cnblogs.com/chuaner/p/15495967.html"
+                      },
+                      "content": "小子群攻击(Small Subgroup Attack)"
+                    }
+                  ]
+                ],
+                [
+                  "254",
+                  "1",
+                  [
+                    "避免",
+                    {
+                      "Tag": "a",
+                      "props": {
+                        "href": "https://en.wikipedia.org/wiki/Timing_attack"
+                      },
+                      "content": "计时攻击(Timing leak Attack)"
+                    }
+                  ]
+                ],
+                [
+                  "255",
+                  "0",
+                  ["保证", { "Tag": "Math", "content": "n < 2^255" }]
+                ]
+              ]
+            }
+          },
+          "你可能会发现你实际的密钥对和在这里测试的不太一致。这是因为 X25519 的密钥对是以小端顺序存储和传输，但是为了易读性，这个页面会将它们显示为普通数字。翻转字节的顺序应该就能够匹配。"
+        ]
+      ]
+    }
+  },
+  {
+    "Tag": "QA",
+    "props": {
+      "content": [
+        ["如果这些是 xy 曲线上的点，y 坐标在哪里?"],
+        [
+          "X25519 不需要每个点的 y 坐标。为了简单起见，我们并不计算它们。只使用 x 坐标也减少了公钥的长度，因为 y 坐标不是密钥的一部分。",
+          "在该曲线上的每一个 x 都对应着满足 ",
+          {
+            "Tag": "Math",
+            "content": "sqrt(y^2)"
+          },
+          " 的两个 y。",
+          {
+            "Tag": "Calculator",
+            "props": {
+              "type": "YCoordinate"
+            }
+          },
+          "只有一半的 x 值在 Curve25519 上是有效的。回到我们的曲线方程，当且仅当表达式 ",
+          {
+            "Tag": "Math",
+            "content": "y^2 = x^3 + 486662x^2 + x"
+          },
+          " 满足 ",
+          {
+            "Tag": "Math",
+            "content": "sqrt(y^2) mod 2^255 - 19"
+          },
+          " 的结果存在时，才称 x 有效。"
+        ]
+      ]
+    }
+  },
+  {
+    "Tag": "QA",
+    "props": {
+      "content": [
+        ["Curve25519 长什么样?"],
+        [
+          "在实数域下的 Curve25519 曲线:",
+          {
+            "Tag": "img",
+            "props": {
+              "src": "https://x25519.xargs.org/images/curve25519-real.png",
+              "fit": "true"
+            }
+          },
+          {
+            "Tag": "Math",
+            "props": {
+              "style": {
+                "textAlign": "center",
+                "display": "block",
+                "fontSize": "0.75em",
+                "marginBottom": "1em"
+              }
+            },
+            "content": "y^2 = x^3 + 486662x^2 + x"
+          },
+          "下图是计算曲线上",
+          {
+            "Tag": "Math",
+            "content": "𝔽_p (mod p)"
+          },
+          "第一个点(",
+          {
+            "Tag": "Math",
+            "content": "x ∈ [0, 2^255-19]"
+          },
+          ")时的可能结果:",
+          {
+            "Tag": "img",
+            "props": {
+              "src": "https://x25519.xargs.org/images/curve25519-field.png",
+              "fit": "true"
+            }
+          },
+          {
+            "Tag": "Math",
+            "props": {
+              "style": {
+                "textAlign": "center",
+                "display": "block",
+                "fontSize": "0.75em"
+              }
+            },
+            "content": "y^2 = x^3 + 486662x^2 + x in 𝔽_p"
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Tag": "QA",
+    "props": {
+      "content": [
+        ["你能给我更多关于椭圆曲线运算的参考或细节吗?"],
+        [
+          "原作者推荐的内容(英文):",
+          {
+            "Tag": "ul",
+            "children": [
+              {
+                "Tag": "li",
+                "children": [
+                  {
+                    "Tag": "a",
+                    "props": {
+                      "href": "https://cr.yp.to/ecdh/curve25519-20060209.pdf"
+                    },
+                    "content": "Curve25519: new Diffie-Hellman speed records"
+                  },
+                  " - 解释曲线及其推导过程"
+                ]
+              },
+              {
+                "Tag": "li",
+                "children": [
+                  {
+                    "Tag": "a",
+                    "props": {
+                      "href": "https://curves.xargs.org/"
+                    },
+                    "content": "The Animated Elliptic Curve"
+                  },
+                  " - 通过动画探索椭圆曲线加密背后的概念"
+                ]
+              },
+              {
+                "Tag": "li",
+                "children": [
+                  {
+                    "Tag": "a",
+                    "props": {
+                      "href": "https://en.wikipedia.org/wiki/Elliptic_curve_point_multiplication"
+                    },
+                    "content": "Wikipedia: EC point multiplication"
+                  },
+                  " - 尤其是关于 Montgomery ladder 的部分"
+                ]
+              },
+              {
+                "Tag": "li",
+                "children": [
+                  {
+                    "Tag": "a",
+                    "props": {
+                      "href": "https://en.wikipedia.org/wiki/Montgomery_curve#Montgomery_arithmetic"
+                    },
+                    "content": "Wikipedia: Montgomery arithmetic"
+                  },
+                  " - 包括点的运算方程"
+                ]
+              },
+              {
+                "Tag": "li",
+                "children": [
+                  {
+                    "Tag": "a",
+                    "props": {
+                      "href": "https://datatracker.ietf.org/doc/html/rfc7748"
+                    },
+                    "content": "RFC 7748"
+                  },
+                  " - 在常数时间内的完成 X25519 with Montgomery ladder 的常用算法列表"
+                ]
+              },
+              {
+                "Tag": "li",
+                "children": [
+                  {
+                    "Tag": "a",
+                    "props": {
+                      "href": "https://martin.kleppmann.com/papers/curve25519.pdf"
+                    },
+                    "content": "PDF: Implementing Curve25519/X25519"
+                  },
+                  " - 前面提到过的 Martin Kleppmann 的论文"
+                ]
+              },
+              {
+                "Tag": "li",
+                "children": [
+                  {
+                    "Tag": "a",
+                    "props": {
+                      "href": "https://andrea.corbellini.name/2015/05/17/elliptic-curve-cryptography-a-gentle-introduction/"
+                    },
+                    "content": "Elliptic Curve Cryptography: a gentle introduction"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      ]
+    }
+  }
+]

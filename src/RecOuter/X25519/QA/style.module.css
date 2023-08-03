@@ -1,0 +1,9 @@
+.qa-mark {
+  margin-top: 12px;
+  margin-right: 4px;
+  display: inline-block;
+  font-family: "Baskerville", sans-serif;
+  font-size: 3em;
+  line-height: 0.9em;
+  color: #666;
+}

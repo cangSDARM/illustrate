@@ -62,9 +62,7 @@ const SecretKeyMultiplier = () => {
             </button>
             <span
               className={classes["help-tip"]}
-              data-tooltip-text="Clamp: Set 5 bits
-                   required by curve security, see Q&A below for full
-                   explanation of clamping."
+              data-tooltip-text="箝位(Clamp)：设置曲线安全所必需的 5 位，详细说明见下面的 Q&A 章节。"
             >
               ?
             </span>

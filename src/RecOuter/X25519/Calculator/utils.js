@@ -76,6 +76,29 @@ export const calcMulti = (ctx) => {
   return result;
 };
 
+export const calcY = (ctx) => {
+  let y1result = "";
+  let y2result = "";
+  try {
+    y1result = "N/A";
+    y2result = "N/A";
+    let x = ctx.x;
+    x %= field.p;
+    let [y1, y2] = curve.Y(x);
+    y1result = `0x${field.toHex(y1)}`;
+    y2result = `0x${field.toHex(y2)}`;
+  } catch (e) {
+    if (e instanceof RangeError) {
+      y1result = y2result = `x=0x${field.toHex(ctx.x)} 的点不在曲线上`;
+    } else {
+      y1result = e.message;
+      y2result = e.message;
+    }
+  }
+
+  return [y1result, y2result];
+};
+
 export const startCase = (str = "") => {
   return str.replace(/(?:[A-Z]|\s+[a-zA-Z])\w+?/g, ($1) => " " + $1).trim();
 };

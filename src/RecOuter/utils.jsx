@@ -64,6 +64,9 @@ export const renderExplanations = (explanations = [], depth = 0, config) => {
       case "Calculator":
         Tag = X25519Series.Calculator;
         break;
+      case "QA":
+        Tag = X25519Series.QA;
+        break;
       case "a":
         expProps.target ||= "_blank";
         break;

@@ -25,13 +25,24 @@ const data = {
       eagerLoad: true,
       json: () => import("./handsOn.json"),
     },
+    {
+      type: "RecOuter",
+      tags: ["server", "stem"],
+      label: "Q & A",
+      eagerLoad: true,
+      json: () => import("./q&a.json"),
+    },
   ],
   ending: {
     mother: "https://x25519.xargs.org/",
     references: [
       {
-        title: "TLS Parameters",
-        href: "https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml",
+        title: "各种椭圆曲线的比较",
+        href: "https://safecurves.cr.yp.to/",
+      },
+      {
+        title: "深入理解 X25519 (PDF, 中文)",
+        href: "https://crypto-in-action.github.io/intro-ed25519/190902-intro-x25519.pdf",
       },
     ],
   },

@@ -148,8 +148,12 @@ const resolver = (equation) => {
   }, []);
 };
 
-const MathBlock = ({ children = "" }) => {
-  return <span className={classes["math"]}>{resolver(children)}</span>;
+const MathBlock = ({ children = "", style }) => {
+  return (
+    <span className={classes["math"]} style={style}>
+      {resolver(children)}
+    </span>
+  );
 };
 
 export default MathBlock;

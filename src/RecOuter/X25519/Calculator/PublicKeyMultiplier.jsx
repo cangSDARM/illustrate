@@ -1,5 +1,4 @@
 import React from "react";
-import classes from "./style.module.css";
 import { useHexValue, calcMulti, getHexValue } from "./utils";
 
 const PublicKeyMultiplier = () => {
