@@ -263,6 +263,10 @@ const data = {
         title: "TLS 1.3 的伪装相关",
         href: "https://github.com/openssl/openssl/issues/17654#issuecomment-1031744534",
       },
+      {
+        title: "从字节层面查看基于 TLS 1.3 的页面请求及响应",
+        href: "https://github.com/jawj/subtls"
+      }
     ],
   },
 };
