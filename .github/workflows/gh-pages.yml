@@ -21,7 +21,7 @@ jobs:
           node-version: "14.x"
 
       - name: Cache dependencies 🍪
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         id: cache
         with:
           path: |
@@ -36,7 +36,7 @@ jobs:
         run: npm --proxy=null --https_proxy=null --strict-ssl=true install
 
       - name: Cache buildings 🏗
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         id: building
         with:
           path: |
